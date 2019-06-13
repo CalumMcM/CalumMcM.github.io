@@ -1,5 +1,15 @@
 import urllib2
 import json
+import time
+
+numbers = []
+
+numbers.append(1)
+print numbers[0]
+
+
+
+
 
 """
 keyGeolocation = 'b71199c8872647f888aee90d767ae10b' #For OpenCage geolocation
@@ -17,22 +27,38 @@ for item in dataGeo['results']:
     lat = pos["lat"]
     lng = pos["lng"]
 
-"""
-urlDarkSky = 'https://api.darksky.net/forecast/2aa80cccb9cabf5848fd5ac03f2fc760/' + str(lat) + ',' + str(lng) 
+
+urlDarkSky = 'https://api.darksky.net/forecast/2aa80cccb9cabf5848fd5ac03f2fc760/' + str(lat) + ',' + str(lng)
 
 json_obj = urllib2.urlopen(urlDarkSky)
 
 dataDark = json.load(json_obj)
-"""
 
-with open('darkResult.txt') as json_file: #Temporary use of reading the dark result to avoid constant messaging
-    dataDark = json.load(json_file)
+
+#with open('darkResult.txt') as json_file: #Temporary use of reading the dark result to avoid constant messaging
+#    dataDark = json.load(json_file)
 
 hourlyDictionary = (dataDark["hourly"])
 Summary48h = hourlyDictionary["summary"]
 data48h = hourlyDictionary["data"]
-print data48h["currently"]
+
 rains48h = []
+temps48h = []
+point = 0
+
+#Time comes in form  "seconds since midnight GMT on 1 Jan 1970"
+for item in data48h:
+    tempF = item["temperature"]
+    rain = item["precipIntensity"]
+    Curtime = item["time"].time()
+    print Curtime
+    rains48h.append(rain)
+    temps48h.append(point)
+
+    #temps48h[point] = int(round((tempF -32) * 5/9))
+    point += 1
+
+
 
 #time = data48h["summary"]
 
