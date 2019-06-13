@@ -1,15 +1,6 @@
 import urllib2
 import json
-import time
-
-numbers = []
-
-numbers.append(1)
-print numbers[0]
-
-
-
-
+from datetime import datetime
 
 """
 keyGeolocation = 'b71199c8872647f888aee90d767ae10b' #For OpenCage geolocation
@@ -19,6 +10,7 @@ urlGeolocation = 'https://api.opencagedata.com/geocode/v1/json?q=G630RE&key=b711
 json_objGeo = urllib2.urlopen(urlGeolocation)
 dataGeo = json.load(json_objGeo)
 """
+
 with open('geoResult.txt') as json_file: #Temporary use of reading the geo result to avoid constant messaging
     dataGeo = json.load(json_file)
 
@@ -44,19 +36,18 @@ data48h = hourlyDictionary["data"]
 
 rains48h = []
 temps48h = []
-point = 0
+times48h = []
 
 #Time comes in form  "seconds since midnight GMT on 1 Jan 1970"
+#print(datetime.utcfromtimestamp(Curtime).strftime('%Y-%m-%d %H:%M:%S'))
+
 for item in data48h:
     tempF = item["temperature"]
     rain = item["precipIntensity"]
-    Curtime = item["time"].time()
-    print Curtime
+    Curtime = item["time"]
+    times48h.append(Curtime)
     rains48h.append(rain)
-    temps48h.append(point)
-
-    #temps48h[point] = int(round((tempF -32) * 5/9))
-    point += 1
+    temps48h.append(int(round((tempF -32) * 5/9)))
 
 
 
