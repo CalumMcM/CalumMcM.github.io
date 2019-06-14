@@ -7,7 +7,7 @@ import urllib2
 import json
 from datetime import datetime
 
-def getAPIData():
+def getAPIData(HoursWanted):
     keyGeolocation = 'b71199c8872647f888aee90d767ae10b' #For OpenCage geolocation
     keyDarkSky = '2aa80cccb9cabf5848fd5ac03f2fc760' #For Dark Sky API
     urlGeolocation = 'https://api.opencagedata.com/geocode/v1/json?q=EH39JN&key=b71199c8872647f888aee90d767ae10b'
@@ -32,7 +32,7 @@ def getAPIData():
 
     return dataDark
 
-def processData(dataDark):
+def breakDownData(dataDark):
     hourlyDictionary = (dataDark["hourly"])
     Summary48h = hourlyDictionary["summary"]
     data48h = hourlyDictionary["data"]
@@ -64,8 +64,9 @@ def processData(dataDark):
 
 
 def main():
-    dataDark = getAPIData()
-    processData(dataDark)
+    HoursWanted = raw_input("How many hours will you be outdoors? ")
+    dataDark = getAPIData(HoursWanted)
+    breakDownData(dataDark)
 
 if __name__ == "__main__":
     main()
