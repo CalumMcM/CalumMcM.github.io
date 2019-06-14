@@ -33,7 +33,7 @@ def getAPIData():
     return dataDark
 
 def breakDownData50(dataDark, HoursWanted):
-    hourlyDictionary = (dataDark["hourly"])
+    hourlyDictionary = dataDark["hourly"]
     Summary48h = hourlyDictionary["summary"]
     data48h = hourlyDictionary["data"]
     
@@ -71,7 +71,10 @@ def breakDownData50(dataDark, HoursWanted):
     return collectedData
 
 def breakDownData8(dataDark, daysWanted):
-    return 0
+    dailyDictionary = dataDark["daily"]
+    collectedData = 0
+    print dailyDictionary
+    return collectedData
 
 def recommender(collectedData):
     Jacket = False
@@ -87,7 +90,8 @@ def recommender(collectedData):
     print collectedData[0]
 
 def main():
-    days = int(raw_input("How many days will you be going away for?"))
+    days = int(raw_input("How many days will you be going away for? "))
+    dataDark = getAPIData()
     if (days <=2):
         while (HoursWanted < 1 or HoursWanted > 50):
             HoursWanted = 0
@@ -96,8 +100,8 @@ def main():
                 print ("The number of hours must be between 0 and 50")
         collectedData = breakDownData50(dataDark, HoursWanted)
     else:
-        collectedData = breakDownData8(dataDark, daysWanted)
-    dataDark = getAPIData()
+        collectedData = breakDownData8(dataDark, days)
+    
     recommender(collectedData)
 
 if __name__ == "__main__":
