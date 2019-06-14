@@ -7,7 +7,7 @@ import urllib2
 import json
 from datetime import datetime
 
-def getAPIData(HoursWanted):
+def getAPIData():
     keyGeolocation = 'b71199c8872647f888aee90d767ae10b' #For OpenCage geolocation
     keyDarkSky = '2aa80cccb9cabf5848fd5ac03f2fc760' #For Dark Sky API
     urlGeolocation = 'https://api.opencagedata.com/geocode/v1/json?q=EH39JN&key=b71199c8872647f888aee90d767ae10b'
@@ -32,41 +32,55 @@ def getAPIData(HoursWanted):
 
     return dataDark
 
-def breakDownData(dataDark):
+def breakDownData(dataDark, HoursWanted):
     hourlyDictionary = (dataDark["hourly"])
     Summary48h = hourlyDictionary["summary"]
     data48h = hourlyDictionary["data"]
 
-    rains48h = []
-    temps48h = []
-    times48h = []
-    precip48h = []
+    rainsh = []
+    tempsh = []
+    timesh = []
+    preciph = []
+
 
     #Time comes in form  "seconds since midnight GMT on 1 Jan 1970"
     #print(datetime.utcfromtimestamp(Curtime).strftime('%Y-%m-%d %H:%M:%S'))
-
+    curHour = 0
     for item in data48h:
         tempF = item["temperature"]
         rain = item["precipIntensity"]
         precip = item["precipProbability"]
         Curtime = item["time"]
-        precip48h.append(precip)
-        times48h.append(Curtime)
-        rains48h.append(rain)
-        temps48h.append(int(round((tempF -32) * 5/9)))
+        preciph.append(precip)
+        timesh.append(Curtime)
+        rainsh.append(rain)
+        tempsh.append(int(round((tempF -32) * 5/9)))
+        if (curHour == HoursWanted):
+            break
+        else:
+            curHour += 1
 
-    averageTemps = sum(temps48h)/len(temps48h)          #Average Temperature for next 48h
-    totalRainfall = sum(rains48h)                       #Total rainfall in mm for next 48h
-    highestPrecipProb = max(precip48h)                  #Highest precipitation probability
-    RHP = rains48h[precip48h.index(highestPrecipProb)]  #Rain for Highest Proability
+    averageTemps = sum(tempsh)/len(tempsh)              #Average Temperature for next 48h
+    totalRainfall = sum(rainsh)                         #Total rainfall in mm for next 48h
+    highestPrecipProb = max(preciph)                    #Highest precipitation probability
+    RHP = rainsh[preciph.index(highestPrecipProb)]      #Rain for Highest Proability
 
     print Summary48h + "\nHighest amount of rainfall in an hour will be: " + str(RHP) + "mm, with a chance of: " + str(highestPrecipProb*100) + "%\nThe total rainfall will be: " + str(totalRainfall) + "\nThe average temperature will be: " + str(averageTemps)
+    collectedData = [averageTemps, totalRainfall, highestPrecipProb, RHP]
+    return collectedData
 
+def recommender(collectedData):
+    print collectedData[0]
 
 def main():
-    HoursWanted = raw_input("How many hours will you be outdoors? ")
-    dataDark = getAPIData(HoursWanted)
-    breakDownData(dataDark)
+    HoursWanted = 0
+    while (HoursWanted < 1 or HoursWanted > 50):
+        HoursWanted = int(raw_input("How many hours will you be outdoors? "))
+        if (HoursWanted < 1 or HoursWanted > 50):
+            print ("The number of hours must be between 1 and 50")
+    dataDark = getAPIData()
+    collectedData = breakDownData(dataDark, HoursWanted)
+    recommender(collectedData)
 
 if __name__ == "__main__":
     main()
