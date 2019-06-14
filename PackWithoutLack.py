@@ -26,22 +26,22 @@ def getAPIData():
     urlDarkSky = 'https://api.darksky.net/forecast/2aa80cccb9cabf5848fd5ac03f2fc760/' + str(lat) + ',' + str(lng)
     json_obj = urllib2.urlopen(urlDarkSky)
     dataDark = json.load(json_obj)
-
     #with open('darkResult.txt') as json_file: #Temporary use of reading the dark result to avoid constant messaging
     #dataDark = json.load(json_file)
-
+    for item in dataDark:
+        print item
     return dataDark
 
-def breakDownData(dataDark, HoursWanted):
+def breakDownData50(dataDark, HoursWanted):
     hourlyDictionary = (dataDark["hourly"])
     Summary48h = hourlyDictionary["summary"]
     data48h = hourlyDictionary["data"]
-
+    
     rainsh = []
     tempsh = []
     timesh = []
     preciph = []
-
+    cloudh = []
 
     #Time comes in form  "seconds since midnight GMT on 1 Jan 1970"
     #print(datetime.utcfromtimestamp(Curtime).strftime('%Y-%m-%d %H:%M:%S'))
@@ -50,6 +50,7 @@ def breakDownData(dataDark, HoursWanted):
         tempF = item["temperature"]
         rain = item["precipIntensity"]
         precip = item["precipProbability"]
+        cloud = item["cloudCover"]
         Curtime = item["time"]
         preciph.append(precip)
         timesh.append(Curtime)
@@ -69,17 +70,34 @@ def breakDownData(dataDark, HoursWanted):
     collectedData = [averageTemps, totalRainfall, highestPrecipProb, RHP]
     return collectedData
 
+def breakDownData8(dataDark, daysWanted):
+    return 0
+
 def recommender(collectedData):
+    Jacket = False
+    Jumper = False
+    Sunglasses = False
+    DuvetJacket = False
+    WaterproofTrousers = False
+    Suncream = False
+    Tshirt = False
+    WoolyHat = False
+
+
     print collectedData[0]
 
 def main():
-    HoursWanted = 0
-    while (HoursWanted < 1 or HoursWanted > 50):
-        HoursWanted = int(raw_input("How many hours will you be outdoors? "))
-        if (HoursWanted < 1 or HoursWanted > 50):
-            print ("The number of hours must be between 1 and 50")
+    days = int(raw_input("How many days will you be going away for?"))
+    if (days <=2):
+        while (HoursWanted < 1 or HoursWanted > 50):
+            HoursWanted = 0
+            HoursWanted = int(raw_input("How many hours will you be away for? "))
+            if (HoursWanted < 0 or HoursWanted > 50):
+                print ("The number of hours must be between 0 and 50")
+        collectedData = breakDownData50(dataDark, HoursWanted)
+    else:
+        collectedData = breakDownData8(dataDark, daysWanted)
     dataDark = getAPIData()
-    collectedData = breakDownData(dataDark, HoursWanted)
     recommender(collectedData)
 
 if __name__ == "__main__":
