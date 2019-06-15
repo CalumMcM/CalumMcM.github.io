@@ -7,7 +7,7 @@ import urllib2
 import json
 from datetime import datetime
 
-ClothesDict = {'WaterproofJacket':False,'Jumper':False,'Sunglasses':False,'DuvetJacket':False,'WaterproofTrousers':False,'Suncream':False,'Tshirt':True,'WoolyHat':False,'Thermals':False}
+ClothesDict = {'WaterproofJacket':False,'Jumper':False,'Sunglasses':False,'DuvetJacket':False,'WaterproofTrousers':False,'Suncream30':False,'Suncream50':False,'Tshirt':True,'WoolyHat':False,'Thermals':False}
 
 def getAPIData():
     keyGeolocation = 'b71199c8872647f888aee90d767ae10b' #For OpenCage geolocation
@@ -36,7 +36,7 @@ def getAPIData():
 #Extracts required data from Dark Sky API data for number of hours given
 #Returns a dictionary holding this extracted data 
 def breakDownData50(dataDark, HoursWanted):
-    collectedData = {'tempsh':[], 'rainsh':[], 'cloudh':[], 'timesh':[], 'preciph':[], 'windsh':[]}
+    collectedData = {'tempsh':[], 'rainsh':[], 'cloudh':[], 'appTempsh':[], 'preciph':[], 'windsh':[], 'cloudCover':[], 'uvIndex':[]}
     hourlyDictionary = dataDark["hourly"]
     Summary48h = hourlyDictionary["summary"]
     data48h = hourlyDictionary["data"]
@@ -46,20 +46,25 @@ def breakDownData50(dataDark, HoursWanted):
     #print(datetime.utcfromtimestamp(Curtime).strftime('%Y-%m-%d %H:%M:%S'))
     curHour = 0
     for item in data48h:
-        temp = item["temperature"]
+        appTemp = item["apparentTemperature"]
         rain = item["precipIntensity"]
         precip = item["precipProbability"]
         cloud = item["cloudCover"]
+        uv = item['uvIndex']
         Curtime = item["time"]
         wind = item["windSpeed"]
+        cloud = item['cloudCover']
 
+        collectedData['uvIndex'].append(uv)
         collectedData['preciph'].append(precip)
         collectedData['timesh'].append(Curtime)
         collectedData['rainsh'].append(rain)
-        collectedData['tempsh'].append(temp)
+        collectedData['appTempsh'].append(appTemp)
         collectedData['cloudh'].append(cloud)
         collectedData['windsh'].append(wind)
+        collectedData['cloudCover'].append(collectedData)
         if (curHour == HoursWanted):
+            print item
             break
         else:
             curHour += 1
@@ -105,20 +110,24 @@ def breakDownData8(dataDark, days):
     return collectedData
 
 def recommenderH(collectedData):
-    minTemp = min(collectedData['tempsh'])
-    print minTemp
     averagetemp = sum(collectedData['tempsh'])/len(collectedData['tempsh'])
     if (averagetemp < 15):
         ClothesDict['Jumper'] = True
-        if (averagetemp < 5 and collectedData[1] < 0.1):
+        if (averagetemp < 5 and collectedData[1] < 0.2):
             ClothesDict['WoolyHat'] = True
             ClothesDict['DuvetJacket'] = True
-            if (min(collectedData[0]) < -5):
+            if (min(collectedData['tempsh']) < -5):
                 ClothesDict['WaterproofJacket'] = True
             if (averagetemp < -13):
                 ClothesDict['Thermals'] = True
-
-
+    if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.19]) > 0): #List comprehension to check if there is ever an hour with >0.19mm of rain
+        ClothesDict['WaterproofJacket'] = True
+    if (sum(collectedData['cloudCover'])/len(collectedData['cloudCover']) < 0.3 and len([uvHour for uvHour in collectedData['uvIndex'] if uvHour > 6])>0): #average cloud cover > 30% and uvIndex >6
+        ClothesDict['Sunglasses'] = True
+    if (len([uvHour for uvHour in collectedData['uvIndex'] if uvHour >7])):
+        ClothesDict['Suncream30']
+        if (len([uvHour for uvHour in collectedData['uvIndex'] if uvHour >9])):
+            ClothesDict['Suncream50']
 
 def recommenderD(collectedData):
 
