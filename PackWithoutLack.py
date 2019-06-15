@@ -8,7 +8,8 @@ import urllib2
 import json
 from datetime import datetime
 
-ClothesDict = {'Boulder':False,'WaterproofJacket':False,'Jumper':False,'Sunglasses':False,'DuvetJacket':False,'WaterproofTrousers':False,'Suncream30':False,'Suncream50':False,'Tshirt':True,'WoolyHat':False,'Thermals':False}
+ClothesDict = {'WaterproofJacket':False,'Jumper':False,'Sunglasses':False,'DuvetJacket':False,'WaterproofTrousers':False,'Suncream30':False,'Suncream50':False,'Tshirt':True,'WoolyHat':False,'Thermals':False}
+global Boulder
 
 class bcolors:
     HEADER = '\033[95m'
@@ -19,6 +20,7 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
 
 def getAPIData():
     keyGeolocation = 'b71199c8872647f888aee90d767ae10b' #For OpenCage geolocation
@@ -118,20 +120,35 @@ def breakDownData8(dataDark, days):
     return collectedData
 
 def recommenderH(collectedData):
+    Boulder = 9
     averagetemp = sum(collectedData['appTempsh'])/len(collectedData['appTempsh'])
     if (averagetemp < 15):
         ClothesDict['Jumper'] = True
-        if (averagetemp < 5 and collectedData[1] < 0.2):
+        Boulder += 6
+        if (averagetemp < 10):
+            Boulder -=6
+        elif (averagetemp < 5):
+            Boulder -= 6
             ClothesDict['WoolyHat'] = True
             ClothesDict['DuvetJacket'] = True
             if (min(collectedData['appTempsh']) < -5):
+                Boulder -= 2
                 ClothesDict['WaterproofJacket'] = True
             if (averagetemp < -9):
+                Boulder -= 4
                 ClothesDict['Thermals'] = True
-    if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.19]) > 0): #List comprehension to check if there is ever an hour with >0.19mm of rain
-        ClothesDict['WaterproofJacket'] = True
-        if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 15]) > 0):
-            ClothesDict['WaterproofTrousers'] = True
+    if(sum(collectedData['appTempsh'])/len(collectedData['appTempsh']) >= 15): #Averagetemp is > 15
+        Boulder += 4
+        if(sum(collectedData['appTempsh'])/len(collectedData['appTempsh']) >= 25): #Averagetemp is > 15
+            Boulder += 8
+    if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.1]) > 0): #List comprehension to check if there is ever an hour with >0.19mm of rain
+        Boulder -= 1
+        if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.2]) > 0):
+            ClothesDict['WaterproofJacket'] = True
+            Boulder -= 4
+            if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 15]) > 0):
+                Boulder -= 10
+                ClothesDict['WaterproofTrousers'] = True
     if ( (sum(collectedData['cloudCover'])/len(collectedData['cloudCover'])) < 0.3 and len([uvHour for uvHour in collectedData['uvIndex'] if uvHour > 6])>0): #average cloud cover > 30% and uvIndex >6
         ClothesDict['Sunglasses'] = True
     if (len([uvHour for uvHour in collectedData['uvIndex'] if uvHour >7])):
