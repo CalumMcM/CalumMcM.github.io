@@ -2,7 +2,6 @@
 # Powered by Dark Sky       #
 # Author: Calum McMeekin    #
 #############################
-#Use PyQt for GUI
 
 import urllib2
 import json
@@ -212,7 +211,7 @@ def recommenderD(collectedData, days):
     Consecutives = 0
     BoulderJudgment = bcolors.WARNING + "Never dry rock" + bcolors.ENDC
     for curDay in range(days):
-        if (collectedData["rains"][curDay] <= 0.2 and collectedData['tempAppMin'][curDay] > -3 and collectedData['tempAppMax'] < 25):
+        if (collectedData["rains"][curDay] <= 0.2 and collectedData['tempAppMin'][curDay] > -3 and collectedData['tempAppMax'][curDay] < 25):
             Consecutives += 1
         else:
             Consecutives = 0
@@ -289,6 +288,6 @@ def main():
         collectedData = breakDownData8(dataDark, days)
         BoulderJudgement = recommenderD(collectedData, days)
     output(BoulderJudgement)
-   
+    print("Powered By Dark Sky")
 if __name__ == "__main__":
     main()
