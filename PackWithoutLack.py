@@ -210,15 +210,19 @@ def recommenderD(collectedData, days):
     #Boulder Judgment
     Consecutives = 0
     BoulderJudgment = bcolors.WARNING + "Never dry rock" + bcolors.ENDC
+    BestDays = []
     for curDay in range(days):
         if (collectedData["rains"][curDay] <= 0.2 and collectedData['tempAppMin'][curDay] > -3 and collectedData['tempAppMax'][curDay] < 25):
             Consecutives += 1
         else:
             Consecutives = 0
         if Consecutives >= 2:
-            bestDay = collectedData["dates"][curDay]
-            BoulderJudgment = bcolors.OKGREEN + "Possible bouldering on " + str(bestDay) + bcolors.ENDC
-    
+            BestDays.append(collectedData["dates"][curDay])
+    if len(BestDays)>0:
+        BoulderJudgment = bcolors.OKGREEN + "Possible bouldering on "
+        for bestDay in BestDays:
+            BoulderJudgment = BoulderJudgment + str(bestDay) + " "
+        BoulderJudgment = BoulderJudgment + bcolors.ENDC
     return BoulderJudgment
 def BoulderProcessor(BoulderScore):
     switch = {
