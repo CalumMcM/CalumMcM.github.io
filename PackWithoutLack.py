@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #############################
 # Powered by Dark Sky       #
 # Author: Calum McMeekin    #
@@ -269,7 +268,7 @@ def output(BoulderJudgement):
     print bcolors.UNDERLINE + "You should PACK:" + bcolors.ENDC
     for item in pack:
         print bcolors.OKGREEN + item + bcolors.ENDC
-    print bcolors.UNDERLINE + "You should LEAVE:" + bcolors.ENDC + "\n"
+    print bcolors.UNDERLINE + "\nYou should LEAVE:" + bcolors.ENDC + ""
     for item in leave:
         print bcolors.WARNING + item + bcolors.ENDC
 
