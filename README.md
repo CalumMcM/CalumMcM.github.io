@@ -31,5 +31,5 @@ This new feature not not only means that PackWithoutLack tells you what to pack 
 ​																	**GO CHECK IT OUT NOW!!!!**
 
 
-__Works best on OSX for current terminal output formatting__
-__Also requires to be run as python 2.7 or any other python 2.x package__
+_Works best on OSX for current terminal output formatting_
+_Also requires to be run as python 2.7 or any other python 2.x package_
