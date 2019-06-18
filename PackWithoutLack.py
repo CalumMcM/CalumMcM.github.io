@@ -23,7 +23,6 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-
 def getAPIData(location):
     #keyGeolocation = 'b71199c8872647f888aee90d767ae10b' #For OpenCage geolocation
     #keyDarkSky = '2aa80cccb9cabf5848fd5ac03f2fc760' #For Dark Sky API
@@ -138,17 +137,17 @@ def recommenderH(collectedData):
     BoulderScore = 9
     averagetemp = sum(collectedData['appTempsh'])/len(collectedData['appTempsh'])
     #Cold temperature filter
-    if (averagetemp < 16):
+    if (averagetemp < 12):
         ClothesDict['Jumper'] = True
         BoulderScore += 6
-        if (averagetemp < 10 and (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.19]) == 0)):
+        if (averagetemp < 6 and (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.19]) == 0)):
             ClothesDict['DuvetJacket'] = True
             BoulderScore -=6
-        elif (averagetemp < 5):
+        elif (averagetemp < 1):
             BoulderScore -= 6
             ClothesDict['WoolyHat'] = True
             ClothesDict['DuvetJacket'] = True
-            if (min(collectedData['appTempsh']) < 0):
+            if (min(collectedData['appTempsh']) < -2):
                 BoulderScore -= 2
                 ClothesDict['Gloves'] = True
                 ClothesDict['WaterproofJacket'] = True
@@ -156,7 +155,7 @@ def recommenderH(collectedData):
                 BoulderScore -= 4
                 ClothesDict['Thermals'] = True
     #Warm temperature filter
-    if(sum(collectedData['appTempsh'])/len(collectedData['appTempsh']) >= 16): #Averagetemp is > 15
+    if(sum(collectedData['appTempsh'])/len(collectedData['appTempsh']) >= 12): #Averagetemp is > 15
         BoulderScore += 4
         if(sum(collectedData['appTempsh'])/len(collectedData['appTempsh']) >= 25): #Averagetemp is > 25
             BoulderScore += 8
@@ -212,7 +211,7 @@ def recommenderD(collectedData, days):
     BoulderJudgment = bcolors.WARNING + "Never dry rock" + bcolors.ENDC
     BestDays = []
     for curDay in range(days):
-        if (collectedData["rains"][curDay] <= 0.2 and collectedData['tempAppMin'][curDay] > -3 and collectedData['tempAppMax'][curDay] < 25):
+        if (collectedData["rains"][curDay] <= 0.3 and collectedData['tempAppMin'][curDay] > -3 and collectedData['tempAppMax'][curDay] < 25):
             Consecutives += 1
         else:
             Consecutives = 0
@@ -224,6 +223,7 @@ def recommenderD(collectedData, days):
             BoulderJudgment = BoulderJudgment + str(bestDay) + " "
         BoulderJudgment = BoulderJudgment + bcolors.ENDC
     return BoulderJudgment
+
 def BoulderProcessor(BoulderScore):
     switch = {
         #Dry ratings
