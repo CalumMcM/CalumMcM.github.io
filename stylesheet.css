@@ -43,14 +43,12 @@ body {
   }
 .flex-containerTop{
     display: flex;
-    flex-direction: wrap;
     justify-content: center;
     flex-direction: column;
     align-items: center
 }
 .flex-containerMid{
     display: flex;
-    flex-direction: wrap;
     justify-content: center;
     flex-direction: column;
     align-items: center
@@ -58,45 +56,41 @@ body {
 .flex-submit{
     display: flex;
     justify-content: center;
-    flex-direction: wrap;
     flex-direction: column;
     align-items: center
 }
 #container {
     background-color: lightskyblue;
-    justify-content: center;
     color: white;
     width: 600px;
     height: 700px;
     margin: auto;
-    border-radius: 10px
+    border-radius: 10px;
+    justify-content: center
+
   }
-.white-box{ background: rgba(255,255,255,0.9); 
-    width: 300px; 
-    height: 500px;
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    border-radius: 5px;
-}
-#top-box{
+#bot-box{ 
     background: rgba(15, 186, 183, 0.9);
-    width: 500px;
-    height: 150px;
+    width: 100px;
+    height: 50px;
     border-radius: 5px;
     margin: 50px;
 }
-button {
-    position: inline-block;
+#top-box{
+    background: rgba(15, 186, 183, 0.9);
+    width: 300px;
+    height: 150px;
+    border-radius: 5px;
+    margin: 50px;
+    font-family: courier;
+}
+#button {
+    margin: 50px;
     line-height: 60px;
-    font-weight: bold;
-    padding: 0 40px;
+    padding: 20px;
     background: salmon;
-    border: none;
+    border-radius: 5px;
+    font-family: courier;
 }
 button:hover {
     background: lightsalmon;
