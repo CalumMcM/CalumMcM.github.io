@@ -8,25 +8,21 @@
         <script type ="text/javascript" src="main.js"></script>
     </head>
     <body>
-        <div id = "container" class = "flex">
+        <form action="main.js" id = "container" class = "flex">
             <u>
                 <h1 style="font-family: courier;">PackWithoutLack</h1>
             </u>            
             <center>
                 <p style="font-family: courier; margin: 20px;">Fill in the following criteria for the time you are going to be away.</p>
             </center>
-            <form action="/action_page.php">
             <div id = "top-box" class = "flex-containerTop">
-                Location (postcode is best): <input type="text" name="location"><br>
+                Location (postcode is best): <input type="text" name="location" placeholder="eg: EH39JN"><br>
             </div>
             <div id = "top-box" class = "flex-containerMid">
-                Days: <input type="text" name="days"><br>
-                Hours: <input type="text" name="hours"><br>
+                Days: <input type="text" name="days" placeholder="eg:4"><br>
+                Hours: <input type="text" name="hours" placeholder="eg:12"><br>
             </div>
-            <div id = "button" class = "flex-submit">
-                <input type="submit" value="Submit">
-            </div>
-            </form>
-        </div>
+            <button id = "button" name="submit" type="submit" value="Submit">Get Results!</button>
+        </form>
     </body>
 </html>
