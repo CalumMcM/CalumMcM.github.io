@@ -40,3 +40,4 @@ This new feature not not only means that PackWithoutLack tells you what to pack 
 
 _Works best on OSX for current terminal output formatting_
 _Also requires to be run as python 2.7 or any other python 2.x package_
+https://www.makeuseof.com/tag/python-javascript-communicate-json/
