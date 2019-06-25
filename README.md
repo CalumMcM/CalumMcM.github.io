@@ -1,4 +1,4 @@
-# PackWithoutLack -- JAVASCRIPt-IMPLEMENTATION BRANCH
+# PackWithoutLack -- JAVASCRIPT-IMPLEMENTATION BRANCH
 
 __The purpose of this branch is to turn PackWithoutLack.py into an API which will be called from a javascript file which is acting as a pretty front-end for the user to interact with. :)__
 
