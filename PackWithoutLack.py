@@ -85,7 +85,7 @@ def breakDownData50(dataDark, HoursWanted):
     highestPrecipProb = max(collectedData['preciph'])                                         #Highest precipitation probability
     RHP = collectedData['rainsh'][collectedData['preciph'].index(highestPrecipProb)]          #Rain for Highest Proability
     timeOfRHP = collectedData['timesh'][collectedData['preciph'].index(highestPrecipProb)] 
-    print (bcolors.UNDERLINE + "\n\nSummary:\n\n" + bcolors.ENDC + Summary48h + "\nHighest amount of rainfall during an hour will be at " + timeOfRHP + ". With " + str(RHP) + "mm falling, and a chance of " + str(highestPrecipProb*100) + "%\nThe total rainfall will be: " + str(totalRainfall) + "mm\nThe average temperature will be: " + str(round(averageTemps,1)) + u"\u00b0C\n")
+    #print (bcolors.UNDERLINE + "\n\nSummary:\n\n" + bcolors.ENDC + Summary48h + "\nHighest amount of rainfall during an hour will be at " + timeOfRHP + ". With " + str(RHP) + "mm falling, and a chance of " + str(highestPrecipProb*100) + "%\nThe total rainfall will be: " + str(totalRainfall) + "mm\nThe average temperature will be: " + str(round(averageTemps,1)) + u"\u00b0C\n")
     
     return collectedData
 
@@ -99,8 +99,8 @@ def breakDownData8(dataDark, days):
     collectedData['Summary'] = summary
 
     curDay = 1
-    print (bcolors.UNDERLINE + "\n\nSummary:\n\n" + bcolors.ENDC)
-    print (bcolors.HEADER + bcolors.UNDERLINE + "Day\t\tRainfall (mm)\tHighest Apparent Temperature (" + u"\u00b0C" + ")\tLowest Apparent Temperature ("+ u"\u00b0C" + ")\tCloudCover (%)" + bcolors.ENDC + "\n")
+    #print (bcolors.UNDERLINE + "\n\nSummary:\n\n" + bcolors.ENDC)
+    #print (bcolors.HEADER + bcolors.UNDERLINE + "Day\t\tRainfall (mm)\tHighest Apparent Temperature (" + u"\u00b0C" + ")\tLowest Apparent Temperature ("+ u"\u00b0C" + ")\tCloudCover (%)" + bcolors.ENDC + "\n")
     for item in dataDaily:
         tempMax = item["apparentTemperatureMax"]
         tempMin = item["apparentTemperatureMin"]
@@ -111,10 +111,6 @@ def breakDownData8(dataDark, days):
         precipProb = item["precipProbability"]
         time = item["sunriseTime"]
         day = (datetime.fromtimestamp(time)).strftime("%A")
-        if (day == "Wednesday" or day == "Thursday" or day == "Saturday"):
-            print (day + "\t" + str(rain) + "\t\t\t" + str(tempMax) + "\t\t\t\t\t" + str(tempMin) + "\t\t\t\t\t" + str(cloudCover*100) + "\n")
-        else:
-            print (day + "\t\t" + str(rain) + "\t\t\t" + str(tempMax) + "\t\t\t\t\t" + str(tempMin) + "\t\t\t\t\t" + str(cloudCover*100) + "\n")
         collectedData['dates'].append(day)
         collectedData['rains'].append(rain)
         collectedData['uvIndex'].append(uv)
@@ -130,7 +126,7 @@ def breakDownData8(dataDark, days):
     dayOfMaxRain = collectedData['dates'][collectedData['rains'].index(max(collectedData["rains"]))]
     dayOfMaxTemp = collectedData['dates'][collectedData['tempAppMax'].index(max(collectedData["tempAppMax"]))]
     dayOfMinTemp = collectedData['dates'][collectedData['tempAppMin'].index(max(collectedData["tempAppMin"]))]
-    print ("\n\n" + summary + "\nHighest amount of rainfall on a given day will be " + str(max(collectedData["rains"])) + "mm on " + str(dayOfMaxRain) + ".\nHighest temperature will be " + str(max(collectedData["tempAppMax"])) + u"\u00b0C" + " on " + str(dayOfMaxTemp) + ". Lowest temperature will be " + str(min(collectedData["tempAppMin"])) + u"\u00b0C" + " on " + str(dayOfMinTemp) + ".\n")
+    #print ("\n\n" + summary + "\nHighest amount of rainfall on a given day will be " + str(max(collectedData["rains"])) + "mm on " + str(dayOfMaxRain) + ".\nHighest temperature will be " + str(max(collectedData["tempAppMax"])) + u"\u00b0C" + " on " + str(dayOfMaxTemp) + ". Lowest temperature will be " + str(min(collectedData["tempAppMin"])) + u"\u00b0C" + " on " + str(dayOfMinTemp) + ".\n")
     return collectedData
 
 def recommenderH(collectedData):
@@ -275,23 +271,19 @@ def output(BoulderJudgement):
     for item in leave:
         print bcolors.WARNING + item + bcolors.ENDC
 
-def main():
-    location = raw_input("Please enter the location of where you are going\n(Postcode is recommended for accurate results): ")
-    days = int(raw_input("How many days will you be going away for (including today and no greater than 8)? "))
-    #night = bool(raw_input("Will you be outside during the night? (y/n) "))
+def outputAPI(BoulderJudgement, collectedData):
+    collectedData["BoulderJudgment"] = BoulderJudgement
+    print collectedData
+    return collectedData
+
+def main(location, days, hours):
     dataDark = getAPIData(location)
     if (days <=2):
-        HoursWanted = int(raw_input("How many hours will you be away for? "))
-        while (HoursWanted < 1 or HoursWanted > 50):
-            HoursWanted = 24
-            if (HoursWanted < 0 or HoursWanted > 50):
-                print ("The number of hours must be between 0 and 50")
-        collectedData = breakDownData50(dataDark, HoursWanted)
+        collectedData = breakDownData50(dataDark, hours)
         BoulderJudgement = recommenderH(collectedData)
     else:
         collectedData = breakDownData8(dataDark, days)
         BoulderJudgement = recommenderD(collectedData, days)
-    output(BoulderJudgement)
-    print("Powered By Dark Sky")
+    outputAPI(BoulderJudgement, collectedData)
 if __name__ == "__main__":
-    main()
+    main("EH39JN", 1, 3)
