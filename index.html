@@ -8,7 +8,7 @@
         <script type ="text/javascript" src="main.js"></script>
     </head>
     <body>
-        <form action="main.js" id = "container" class = "flex">
+        <form target = "_self" id = "container" class = "flex">
             <u>
                 <h1 style="font-family: courier;">PackWithoutLack</h1>
             </u>            
@@ -20,9 +20,17 @@
             </div>
             <div id = "top-box" class = "flex-containerMid">
                 Days: <input type="text" name="days" placeholder="eg:4"><br>
-                Hours: <input type="text" name="hours" placeholder="eg:12"><br>
+                <p>Hours (If days < 2): </p><input type="text" name="hours" placeholder="eg:12"><br>
             </div>
-            <button id = "button" name="submit" type="submit" value="Submit">Get Results!</button>
+            <button onclick="myHTMLFUNCTION()" id = "button" name="submit" type="submit" value="Submit">Get Results!</button>
         </form>
+        <script>
+            function myHTMLFUNCTION(){
+                const location = document.getElementById("container").elements["location"].value;
+                const days = document.getElementById("container").elements["days"].value;
+                const hours = document.getElementById("container").elements["hours"].value;
+                callPackWithoutLackAPI(location, days, hours);
+            }
+        </script>
     </body>
 </html>
