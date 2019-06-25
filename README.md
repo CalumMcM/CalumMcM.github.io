@@ -1,4 +1,11 @@
-# PackWithoutLack
+# PackWithoutLack -- JAVASCRIPt-IMPLEMENTATION BRANCH
+
+__The purpose of this branch is to turn PackWithoutLack.py into an API which will be called from a javascript file which is acting as a pretty front-end for the user to interact with. :)__
+
+
+
+
+___
 
 PackWithoutLack means that the next time you go to pack your bag before you leave you won't be lacking anything you need.
 
