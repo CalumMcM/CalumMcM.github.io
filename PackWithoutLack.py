@@ -2,7 +2,7 @@
 # Powered by Dark Sky       #
 # Author: Calum McMeekin    #
 #############################
-
+import sys
 import urllib2
 import json
 from datetime import datetime
@@ -254,7 +254,7 @@ def BoulderProcessor(BoulderScore):
         -20: bcolors.REDUNDERBLACK + "Why are you even asking?" + bcolors.ENDC
     } 
     return switch.get(BoulderScore, "Unprecidented Boulder Score of: " + str(BoulderScore))
-
+'''
 def output(BoulderJudgement):
     pack = []
     leave = []
@@ -270,11 +270,7 @@ def output(BoulderJudgement):
     print bcolors.UNDERLINE + "\nYou should LEAVE:" + bcolors.ENDC + ""
     for item in leave:
         print bcolors.WARNING + item + bcolors.ENDC
-
-def outputAPI(BoulderJudgement, collectedData):
-    collectedData["BoulderJudgment"] = BoulderJudgement
-    print collectedData
-    return collectedData
+'''
 
 def main(location, days, hours):
     dataDark = getAPIData(location)
@@ -284,6 +280,11 @@ def main(location, days, hours):
     else:
         collectedData = breakDownData8(dataDark, days)
         BoulderJudgement = recommenderD(collectedData, days)
-    outputAPI(BoulderJudgement, collectedData)
+    output(BoulderJudgement, collectedData)
+
+def output(BoulderJudgement, collectedData):
+    collectedData["BoulderJudgment"] = BoulderJudgement
+    print (str(collectedData))
+
 if __name__ == "__main__":
-    main("EH39JN", 1, 3)
+    main(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
