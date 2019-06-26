@@ -55,6 +55,7 @@ pip install flask
 ```
 python packwithoutlack.py
 ```
+5. Pass parameters by going to http://127.0.0.1:5000/ and adding defualt/param1/param2/param3
 
 _Works best on OSX for current terminal output formatting_
 _Also requires to be run as python 2.7 or any other python 2.x package_
