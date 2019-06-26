@@ -223,54 +223,37 @@ def recommenderD(collectedData, days):
 def BoulderProcessor(BoulderScore):
     switch = {
         #Dry ratings
-        9: bcolors.OKGREEN + "PERFECT" + bcolors.ENDC,
-        3: bcolors.OKGREEN + "A tad cold but dry" + bcolors.ENDC,
-        1: bcolors.OKGREEN + "Very cold but dry" + bcolors.ENDC,
-        -3: bcolors.WARNING + "Extremely cold but dry" + bcolors.ENDC,
-        15: bcolors.OKGREEN + "PERFECT" + bcolors.ENDC,
-        13: bcolors.OKGREEN + "Very warm but dry" + bcolors.ENDC,
-        21: bcolors.WARNING + "Extremely warm but dry" + bcolors.ENDC,
+        9:  "G|PERFECT",
+        3:  "G|A tad cold but dry",
+        1:  "G|Very cold but dry",
+        -3: "W|Extremely cold but dry",
+        15: "G|PERFECT",
+        13: "G|Very warm but dry",
+        21: "W|Extremely warm but dry",
         #Damp ratings
-        8: bcolors.OKLIGHTBLUE + "Mild but damp" + bcolors.ENDC,
-        2: bcolors.OKLIGHTBLUE + "A tad cold and damp" + bcolors.ENDC,
-        0: bcolors.WARNING + "Very cold and damp" + bcolors.ENDC,
-        -2: bcolors.FAIL + "Extremely cold and wet" + bcolors.ENDC,
-        14: bcolors.OKLIGHTBLUE + "Warm but damp" + bcolors.ENDC,
-        12: bcolors.WARNING + "Very warm and damp" + bcolors.ENDC,
-        20: bcolors.FAIL + "Extremely warm and damp" + bcolors.ENDC,
+        8:  "L|Mild but damp",
+        2:  "L|A tad cold and damp",
+        0:  "W|Very cold and damp",
+        -2: "F|Extremely cold and wet",
+        14: "L|Warm but damp",
+        12: "W|Very warm and damp",
+        20: "F|Extremely warm and damp",
         #Wet ratings
-        -22: bcolors.OKBLUE + "Wet but mild, look for overhang" + bcolors.ENDC,
-        -28: bcolors.FAIL + "Its just not gonna work out i'm afraid" + bcolors.ENDC,
-        -30: bcolors.WARNING + "Wet and very cold" + bcolors.ENDC,
-        -32: bcolors.FAIL + "Put the kettle on as there's no chance of a send" + bcolors.ENDC,
-        -16: bcolors.OKBLUE + "Warm and wet, look for overhang" + bcolors.ENDC,
-        -18: bcolors.WARNING + "Very warm and wet, overhang required" + bcolors.ENDC,
-        -10: bcolors.FAIL + "Extremely warm and wet" + bcolors.ENDC,
+        -22: "B|Wet but mild, look for overhang",
+        -28: "F|Its just not gonna work out i'm afraid",
+        -30: "W|Wet and very cold",
+        -32: "F|Put the kettle on as there's no chance of a send",
+        -16: "B|Warm and wet, look for overhang",
+        -18: "W|Very warm and wet, overhang required",
+        -10: "F|Extremely warm and wet",
         #Soaking ratings
-        -38: bcolors.FAIL + "Extremely wet and cold" + bcolors.ENDC,
-        -40: bcolors.FAIL + "Extremely wet and very cold" + bcolors.ENDC,
-        -42: bcolors.REDUNDERBLACK + "Don't even think of getting the send in" + bcolors.ENDC,
-        -26: bcolors.FAIL + "Extrememly wet and warm" + bcolors.ENDC,
-        -20: bcolors.REDUNDERBLACK + "Why are you even asking?" + bcolors.ENDC
+        -38: "F|Extremely wet and cold",
+        -40: "F|Extremely wet and very cold",
+        -42: "R|Don't even think of getting the send in",
+        -26: "F|Extrememly wet and warm",
+        -20: "R|Why are you even asking?"
     } 
     return switch.get(BoulderScore, "Unprecidented Boulder Score of: " + str(BoulderScore))
-'''
-def output(BoulderJudgement):
-    pack = []
-    leave = []
-    print bcolors.HEADER + "Boulder Judgment: " + BoulderJudgement + "\n"
-    for clothingItem in ClothesDict:
-        if ClothesDict[clothingItem]:
-            pack.append(clothingItem)
-        else:
-            leave.append(clothingItem)
-    print bcolors.UNDERLINE + "You should PACK:" + bcolors.ENDC
-    for item in pack:
-        print bcolors.OKGREEN + item + bcolors.ENDC
-    print bcolors.UNDERLINE + "\nYou should LEAVE:" + bcolors.ENDC + ""
-    for item in leave:
-        print bcolors.WARNING + item + bcolors.ENDC
-'''
 
 def main(location, days, hours):
     dataDark = getAPIData(location)
@@ -280,11 +263,11 @@ def main(location, days, hours):
     else:
         collectedData = breakDownData8(dataDark, days)
         BoulderJudgement = recommenderD(collectedData, days)
-    output(BoulderJudgement, collectedData)
+    output(BoulderJudgement)
 
-def output(BoulderJudgement, collectedData):
-    collectedData["BoulderJudgment"] = BoulderJudgement
-    print (str(collectedData))
+def output(BoulderJudgement):
+    ClothesDict["BoulderJudgment"] = BoulderJudgement
+    print (str(ClothesDict))
 
 if __name__ == "__main__":
     main(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
