@@ -32,6 +32,38 @@
     justify-content: center
 
   }
+#BoulderResultsContainer{
+    background-color: rgb(14, 199, 245);
+    color: white;
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    justify-content: flex-end;
+    margin:5px
+}
+#ResultTopContainer{
+    background-color: rgb(245, 14, 245);
+    color: white;
+    width: 400px;
+    height: 100px;
+    border-radius: 10px;
+    justify-content: center
+}
+#ResultBotContainer{
+    background-color: rgb(245, 14, 26);
+    color: white;
+    width: 400px;
+    height: 100px;
+    border-radius: 10px;
+    justify-content: center
+}
+#InvisibleContainer{
+    width: 400px;
+    height: 170px;
+    border-radius: 10px;
+    justify-content: center;
+    margin-bottom: 5px
+}
 #bot-box{ 
     background: rgba(15, 186, 183, 0.9);
     width: 100px;

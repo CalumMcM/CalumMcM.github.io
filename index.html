@@ -8,7 +8,7 @@
         <script type ="text/javascript" src="main.js"></script>
     </head>
     <body>
-        <form target = "_self" id = "container" class = "flex">
+        <form target = "_self" action='results.html' id = "container" class = "flex">
             <u>
                 <h1 style="font-family: courier;">PackWithoutLack</h1>
             </u>            
@@ -26,11 +26,13 @@
         </form>
         <script>
             function myHTMLFUNCTION(){
-                const location = document.getElementById("container").elements["location"].value;
-                const days = document.getElementById("container").elements["days"].value;
-                const hours = document.getElementById("container").elements["hours"].value;
-                callPackWithoutLackAPI(location, days, hours);
+                const locationGET = document.getElementById("container").elements["location"].value;
+                const daysGET = document.getElementById("container").elements["days"].value;
+                const hoursGET = document.getElementById("container").elements["hours"].value;
+                var freshAPI = new APICall(locationGET, daysGET, hoursGET, null)
+                freshAPI.callPackWithoutLackAPI();
             }
+            //const injectAPI = () => freshAPI.callPackWithoutLackAPI();
         </script>
     </body>
 </html>
