@@ -8,22 +8,25 @@
         <script type ="text/javascript" src="main.js"></script>
     </head>
     <body>
-        <form target = "_self" action='results.html' id = "container" class = "flex">
-            <u>
-                <h1 style="font-family: courier;">PackWithoutLack</h1>
-            </u>            
-            <center>
-                <p style="font-family: courier; margin: 20px;">Fill in the following criteria for the time you are going to be away.</p>
-            </center>
-            <div id = "top-box" class = "flex-containerTop">
-                Location (postcode is best): <input type="text" name="location" placeholder="eg: EH39JN"><br>
-            </div>
-            <div id = "top-box" class = "flex-containerMid">
-                Days: <input type="text" name="days" placeholder="eg:4"><br>
-                <p>Hours (If days < 2): </p><input type="text" name="hours" placeholder="eg:12"><br>
-            </div>
-            <button onclick="myHTMLFUNCTION()" id = "button" name="submit" type="submit" value="Submit">Get Results!</button>
-        </form>
+        <div class="flex">
+            <form target = "_self" action='results.html' id = "container" class = "flex">
+                <u>
+                    <h1 style="font-family: courier;">PackWithoutLack</h1>
+                </u>            
+                <center>
+                    <p style="font-family: courier; margin: 20px; font-size: 20px">Fill in the following criteria for the time you are going to be away.</p>
+                </center>
+                <div id = "top-box" class = "flex-containerTop">
+                    Location (postcode is best): <input type="text" name="location" placeholder="eg: EH39JN"><br>
+                </div>
+                <div id = "top-box" class = "flex-containerMid">
+                    Days: <input type="text" name="days" placeholder="eg:4"><br>
+                    <p>Hours (If days < 2): </p><input type="text" name="hours" placeholder="eg:12"><br>
+                </div>
+                <button onclick="myHTMLFUNCTION()" id = "button" name="submit" type="submit" value="Submit">Get Results!</button>
+            </form>
+            <p style="color: black; font-family: courier">Powered By DarkSky</p>
+        </div>
         <script>
             function myHTMLFUNCTION(){
                 const locationGET = document.getElementById("container").elements["location"].value;
