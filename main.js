@@ -1,6 +1,5 @@
-import * as execSync from child_process;
-var output;
-
+ClothesDict = {'StreetShoes':'True', 'Gloves':'False','Wellies':'False','StreetTrousers':'True','WaterproofJacket':'False','Jumper':'False','Sunglasses':'False','DuvetJacket':'False','WaterproofTrousers':'False','SuncreamFactor30':'False','SuncreamFactor50':'False','Tshirt':'True','WoolyHat':'False','Thermals':'False'}
+/*
 class APICall{
     constructor(location, days, hours){
         this._location = location;
@@ -48,4 +47,19 @@ function callFunction(){
     call = 'python PackWithoutLack.py ' + location + ' ' +  days + ' ' + hour;
     output = execSync(call, { encoding: 'utf-8' }); 
     document.write(console.log(output));
+}
+*/
+function returnPack(){
+    for (let clothes in ClothesDict){
+        if(ClothesDict[clothes] === 'True'){
+            document.write(clothes + '\t');
+        }
+    }
+}
+function returnLack(){
+    for (let clothes in ClothesDict){
+        if(ClothesDict[clothes] === 'False'){
+            document.write(clothes +'\t');
+        }
+    }
 }
