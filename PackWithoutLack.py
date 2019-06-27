@@ -6,6 +6,20 @@ import sys
 import urllib2
 import json
 from datetime import datetime
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/main/<location>/<days>/<hours>")
+def main(location, days, hours):
+    dataDark = getAPIData(location)
+    if (days <=2):
+        collectedData = breakDownData50(dataDark, hours)
+        BoulderJudgement = recommenderH(collectedData)
+    else:
+        collectedData = breakDownData8(dataDark, days)
+        BoulderJudgement = recommenderD(collectedData, days)
+    output(BoulderJudgement)
 
 ClothesDict = {'StreetShoes':True, 'Gloves':False,'Wellies':False,'StreetTrousers':True,'WaterproofJacket':False,'Jumper':False,'Sunglasses':False,'DuvetJacket':False,'WaterproofTrousers':False,'SuncreamFactor30':False,'SuncreamFactor50':False,'Tshirt':True,'WoolyHat':False,'Thermals':False}
 global BoulderScore
@@ -255,19 +269,9 @@ def BoulderProcessor(BoulderScore):
     } 
     return switch.get(BoulderScore, "Unprecidented Boulder Score of: " + str(BoulderScore))
 
-def main(location, days, hours):
-    dataDark = getAPIData(location)
-    if (days <=2):
-        collectedData = breakDownData50(dataDark, hours)
-        BoulderJudgement = recommenderH(collectedData)
-    else:
-        collectedData = breakDownData8(dataDark, days)
-        BoulderJudgement = recommenderD(collectedData, days)
-    output(BoulderJudgement)
-
 def output(BoulderJudgement):
     ClothesDict["BoulderJudgment"] = BoulderJudgement
-    print (str(ClothesDict))
+    return (str(ClothesDict))
 
 if __name__ == "__main__":
-    main(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
+    app.run()
