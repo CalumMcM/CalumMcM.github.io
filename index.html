@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="flex">
-            <form target = "_self" action='results.html' id = "container" class = "flex">
+            <form target = "_self" onsubmit="return false" id = "container" class = "flex">
                 <u>
                     <h1 style="font-family: courier;">PackWithoutLack</h1>
                 </u>            
@@ -28,13 +28,16 @@
             <p style="color: black; font-family: courier">Powered By DarkSky</p>
         </div>
         <script>
+            
             function myHTMLFUNCTION(){
                 const locationGET = document.getElementById("container").elements["location"].value;
                 const daysGET = document.getElementById("container").elements["days"].value;
                 const hoursGET = document.getElementById("container").elements["hours"].value;
-                var freshAPI = new APICall(locationGET, daysGET, hoursGET, null)
-                freshAPI.callPackWithoutLackAPI();
+                var freshAPI = new APICall(locationGET, daysGET, hoursGET)
+                //freshAPI.callPackWithoutLackAPI();
+                callFunction();
             }
+            
             //const injectAPI = () => freshAPI.callPackWithoutLackAPI();
         </script>
     </body>
