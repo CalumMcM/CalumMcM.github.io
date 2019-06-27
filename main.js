@@ -27,10 +27,9 @@ class APICall{
     }
     callPackWithoutLackAPI(){
         // Instantiate the Shell object and invoke its execute method.
-        const execSync = require('child_process').execSync;
-        call = 'python PackWithoutLack.py ' + this._location + ' ' +  this._days + ' ' + this._hours
-        output = execSync(call, { encoding: 'utf-8' }); 
-        console.log(output);
+        const response = await fetch('http://example.com/movies.json');
+        console.log(response);
+        
     }
     deconstructOutput(){
         const BoulderJudgement = output['BoulderJudgement'];
