@@ -1,4 +1,4 @@
-ClothesDict = {'StreetShoes':'True', 'Gloves':'False','Wellies':'False','StreetTrousers':'True','WaterproofJacket':'False','Jumper':'False','Sunglasses':'False','DuvetJacket':'False','WaterproofTrousers':'False','SuncreamFactor30':'False','SuncreamFactor50':'False','Tshirt':'True','WoolyHat':'False','Thermals':'False'}
+ClothesDict = {'Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Waterproof Jacket':'False','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'}
 /*
 class APICall{
     constructor(location, days, hours){

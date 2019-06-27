@@ -21,7 +21,7 @@ def main(location, days, hours):
         BoulderJudgement = recommenderD(collectedData, days)
     output(BoulderJudgement)
 
-ClothesDict = {'StreetShoes':'True', 'Gloves':'False','Wellies':'False','StreetTrousers':'True','WaterproofJacket':'False','Jumper':'False','Sunglasses':'False','DuvetJacket':'False','WaterproofTrousers':'False','SuncreamFactor30':'False','SuncreamFactor50':'False','Tshirt':'True','WoolyHat':'False','Thermals':'False'}
+ClothesDict = {'Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Waterproof Jacket':'False','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'}
 global BoulderScore
 
 class bcolors:
@@ -151,16 +151,16 @@ def recommenderH(collectedData):
         ClothesDict['Jumper'] = 'True'
         BoulderScore += 6
         if (averagetemp < 6 and (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.19]) == 0)):
-            ClothesDict['DuvetJacket'] = 'True'
+            ClothesDict['Duvet Jacket'] = 'True'
             BoulderScore -=6
         elif (averagetemp < 1):
             BoulderScore -= 6
-            ClothesDict['WoolyHat'] = 'True'
-            ClothesDict['DuvetJacket'] = 'True'
+            ClothesDict['Wooly hat'] = 'True'
+            ClothesDict['Duvet Jacket'] = 'True'
             if (min(collectedData['appTempsh']) < -2):
                 BoulderScore -= 2
                 ClothesDict['Gloves'] = 'True'
-                ClothesDict['WaterproofJacket'] = 'True'
+                ClothesDict['Waterproof Jacket'] = 'True'
             if (averagetemp < -5):
                 BoulderScore -= 4
                 ClothesDict['Thermals'] = 'True'
@@ -173,20 +173,20 @@ def recommenderH(collectedData):
     if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.19]) > 0): #List comprehension to check if there is ever an hour with >0.19mm of rain
         BoulderScore -= 1
         if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.2]) > 0):
-            ClothesDict['WaterproofJacket'] = 'True'
+            ClothesDict['Waterproof Jacket'] = 'True'
             BoulderScore -= 30
             if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 3]) > 0):
                 BoulderScore -= 10
                 ClothesDict['Wellies'] = 'True'
-                ClothesDict['WaterproofTrousers'] = 'True'
+                ClothesDict['Waterproof Jacket'] = 'True'
     #CloudCover filter
     if ( (sum(collectedData['cloudCover'])/len(collectedData['cloudCover'])) < 0.4): #average cloud cover > 30% and uvIndex >6
         ClothesDict['Sunglasses'] = 'True'
     #UV filter
     if (len([uvHour for uvHour in collectedData['uvIndex'] if uvHour >7])):
-        ClothesDict['SuncreamFactor30']
+        ClothesDict['Suncream Facter 30']
         if (len([uvHour for uvHour in collectedData['uvIndex'] if uvHour >9])):
-            ClothesDict['SuncreamFactor50']
+            ClothesDict['Suncream Facter 50']
     return BoulderProcessor(BoulderScore)
 
 def recommenderD(collectedData, days):
@@ -194,25 +194,25 @@ def recommenderD(collectedData, days):
     if (len([minTemp for minTemp in collectedData['tempAppMin'] if minTemp < 15]) > 0):
         ClothesDict["Jumper"] = 'True'
         if (len([minTemp for minTemp in collectedData['tempAppMin'] if minTemp < 10]) > 0 ):
-            ClothesDict["DuvetJacket"] = 'True'
+            ClothesDict["Duvet Jacket"] = 'True'
             if (len([minTemp for minTemp in collectedData['tempAppMin'] if minTemp < 5]) > 0):
-                ClothesDict["WoolyHat"] = 'True'
-                ClothesDict["WaterproofJacket"] = 'True'
+                ClothesDict["Wooly hat"] = 'True'
+                ClothesDict["Waterproof Jacket"] = 'True'
                 if (len([minTemp for minTemp in collectedData['tempAppMin'] if minTemp < 0]) > 0):
                     ClothesDict["Thermals"] = 'True'
                     ClothesDict["Gloves"] = 'True'
     #Rain filter
     if (len([RainHour for RainHour in collectedData['rains'] if RainHour >= 0.2]) > 0):
-        ClothesDict["WaterproofJacket"] = 'True'
+        ClothesDict["Waterproof Jacket"] = 'True'
         if (len([RainHour for RainHour in collectedData['rains'] if RainHour >= 1.5]) > 0):
-            ClothesDict["WaterproofTrousers"] = 'True'
+            ClothesDict["Waterproof Jacket"] = 'True'
             if (len([RainHour for RainHour in collectedData['rains'] if RainHour >= 3]) > 0):
                 ClothesDict["Wellies"] = 'True'
     #UV Filter
     if (len([uvHour for uvHour in collectedData['uvIndex'] if uvHour >7])):
-        ClothesDict['SuncreamFactor30']
+        ClothesDict['Suncream Facter 30']
         if (len([uvHour for uvHour in collectedData['uvIndex'] if uvHour >9])):
-            ClothesDict['SuncreamFactor50']
+            ClothesDict['Suncream Facter 50']
     #CloudCover Filter
     if (len([cloudCover for cloudCover in collectedData['cloudCover'] if cloudCover<0.35])>0): #average cloud cover > 30% and uvIndex >6
         ClothesDict['Sunglasses'] = 'True'
