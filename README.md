@@ -43,9 +43,12 @@ Instructions for setting up python server:
 ```
 virtualenv myProject
 ```
-2. Open a source in the activate folder
+2. Activate the virtual environment
 ```
+//MacOSX/Linux
 source myProject/bin/activate
+//Windows
+myproject\Scripts\activate
 ```
 3. Install flask in you source
 ```
