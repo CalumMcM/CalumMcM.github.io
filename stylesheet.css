@@ -4,16 +4,12 @@
     flex-direction: column;
     align-items: center;
   }
-.flex-containerTop{
+  .flex-Invis{
+      display:flex;
+  }
+.flex-container{
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    align-items: center
-}
-.flex-containerMid{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
     align-items: center
 }
 .flex-submit{
@@ -22,27 +18,55 @@
     flex-direction: column;
     align-items: center
 }
+.flex-Summary{
+    display: flex;
+    justify-content: flex-start
+}
 #container {
     background-color: lightskyblue;
     color: white;
     width: 600px;
-    height: 700px;
+    height: 750px;
     margin: auto;
     border-radius: 10px;
     justify-content: center
 
   }
+#text-field{
+    border-radius:10px;
+    height:20px;
+    margin-bottom:10px
+}
 #BoulderResultsContainer{
-    background-color: rgb(14, 199, 245);
-    color: white;
+    background-color:black;
+    color: rgb(0, 0, 0);
     width: 400px;
-    height: 50px;
+    height: 70px;
     border-radius: 10px;
-    justify-content: flex-end;
-    margin:5px
+    margin:5px;
+    line-height: 15px;
+    font-family: courier
+}
+#BoulderResultsContainerLeft{
+    background-color:Black;
+    color: White;
+    width: 130px;
+    height: 70px;
+    border-radius: 10px;
+    line-height: 15px;
+    font-family: courier
+}
+#BoulderResultsContainerRight{
+    background-color:white;
+    color: White;
+    width: 270px;
+    height: 70px;
+    border-radius: 10px;
+    line-height: 15px;
+    font-family: courier
 }
 #ResultTopContainer{
-    background-color: rgb(245, 14, 245);
+    background-color: rgb(14, 245, 33);
     color: white;
     width: 400px;
     height: 100px;
@@ -53,10 +77,31 @@
     background-color: rgb(122, 14, 245);
     color: white;
     width: 400px;
-    height: 130px;
+    height: 150px;
     border-radius: 10px;
     margin-bottom: 5px;
-    justify-content: center
+}
+#SummaryContainerLeft{
+    background-color: rgb(122, 14, 245);
+    color: white;
+    width: 100px;
+    height: 60px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    justify-content: center;
+    align-content: center;
+}
+#SummaryContainerRight{
+    background-color: rgb(122, 14, 245);
+    color: white;
+    width: 300px;
+    height: 120px;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-top:10px;
+    justify-content: center;
+    align-content: center;
+    font-family: courier
 }
 #ResultBotContainer{
     background-color: rgb(245, 14, 26);
@@ -71,8 +116,20 @@
     height: 170px;
     font-size: 25px;
     border-radius: 10px;
-    justify-content: center;
     margin-bottom: 5px
+}
+#InvisConLeft{
+    width: 200px;
+    height: 170px;
+    font-size: 22.5px;
+    justify-content: center;
+}
+#InvisConRight{
+    width: 200px;
+    height: 170px;
+    font-size: 22.5px;
+
+    justify-content: center;
 }
 #bot-box{ 
     background: rgba(15, 186, 183, 0.9);
@@ -89,14 +146,38 @@
     margin: 20px;
     font-family: courier;
 }
-#button {
+.button {
     margin: 50px;
+    font-size: 25px;
     line-height: 30px;
     padding: 20px;
     background: salmon;
     border-radius: 5px;
-    font-family: Arial
+    font-family: 'Courier';
+    transition: all 0.5s;
+    cursor: pointer;
 }
-button:hover {
-    background: lightsalmon;
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
 }

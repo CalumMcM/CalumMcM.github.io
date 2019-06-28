@@ -99,8 +99,8 @@ def breakDownData50(dataDark, HoursWanted):
     highestPrecipProb = max(collectedData['preciph'])                                         #Highest precipitation probability
     RHP = collectedData['rainsh'][collectedData['preciph'].index(highestPrecipProb)]          #Rain for Highest Proability
     timeOfRHP = collectedData['timesh'][collectedData['preciph'].index(highestPrecipProb)] 
-    #print (bcolors.UNDERLINE + "\n\nSummary:\n\n" + bcolors.ENDC + Summary48h + "\nHighest amount of rainfall during an hour will be at " + timeOfRHP + ". With " + str(RHP) + "mm falling, and a chance of " + str(highestPrecipProb*100) + "%\nThe total rainfall will be: " + str(totalRainfall) + "mm\nThe average temperature will be: " + str(round(averageTemps,1)) + u"\u00b0C\n")
-    
+    summary = Summary48h + "Highest amount of rainfall during an hour will be at " + timeOfRHP + ". With " + str(RHP) + "mm falling, and a chance of " + str(highestPrecipProb*100) + "%<br>The total rainfall will be: " + str(totalRainfall) + "mm<br>The average temperature will be: " + str(round(averageTemps,1)) + u"\u00b0C"
+    collectedData['summary'] = summary
     return collectedData
 
 #Extracts required data from Dark Sky API data for number of days given
@@ -140,7 +140,8 @@ def breakDownData8(dataDark, days):
     dayOfMaxRain = collectedData['dates'][collectedData['rains'].index(max(collectedData["rains"]))]
     dayOfMaxTemp = collectedData['dates'][collectedData['tempAppMax'].index(max(collectedData["tempAppMax"]))]
     dayOfMinTemp = collectedData['dates'][collectedData['tempAppMin'].index(max(collectedData["tempAppMin"]))]
-    #print ("\n\n" + summary + "\nHighest amount of rainfall on a given day will be " + str(max(collectedData["rains"])) + "mm on " + str(dayOfMaxRain) + ".\nHighest temperature will be " + str(max(collectedData["tempAppMax"])) + u"\u00b0C" + " on " + str(dayOfMaxTemp) + ". Lowest temperature will be " + str(min(collectedData["tempAppMin"])) + u"\u00b0C" + " on " + str(dayOfMinTemp) + ".\n")
+    summary = "Highest amount of rainfall on a given day will be " + str(max(collectedData["rains"])) + "mm on " + str(dayOfMaxRain) + ".<br>Highest temperature will be " + str(max(collectedData["tempAppMax"])) + u"\u00b0C" + " on " + str(dayOfMaxTemp) + ". Lowest temperature will be " + str(min(collectedData["tempAppMin"])) + u"\u00b0C" + " on " + str(dayOfMinTemp) + "."
+    collectedData['summary'] = summary
     return collectedData
 
 def recommenderH(collectedData):
@@ -237,40 +238,40 @@ def recommenderD(collectedData, days):
 def BoulderProcessor(BoulderScore):
     switch = {
         #Dry ratings
-        9:  "G|PERFECT",
-        3:  "G|A tad cold but dry",
-        1:  "G|Very cold but dry",
-        -3: "W|Extremely cold but dry",
-        15: "G|PERFECT",
-        13: "G|Very warm but dry",
-        21: "W|Extremely warm but dry",
+        9:  "Green|PERFECT",
+        3:  "Green|A tad cold but dry",
+        1:  "Green|Very cold but dry",
+        -3: "Warning|Extremely cold but dry",
+        15: "Green|PERFECT",
+        13: "Green|Very warm but dry",
+        21: "Warning|Extremely warm but dry",
         #Damp ratings
-        8:  "L|Mild but damp",
-        2:  "L|A tad cold and damp",
-        0:  "W|Very cold and damp",
-        -2: "F|Extremely cold and wet",
-        14: "L|Warm but damp",
-        12: "W|Very warm and damp",
-        20: "F|Extremely warm and damp",
+        8:  "skyblue|Mild but damp",
+        2:  "skyblue|A tad cold and damp",
+        0:  "Warning|Very cold and damp",
+        -2: "89243A|Extremely cold and wet",
+        14: "skyblue|Warm but damp",
+        12: "Warning|Very warm and damp",
+        20: "89243A|Extremely warm and damp",
         #Wet ratings
-        -22: "B|Wet but mild, look for overhang",
-        -28: "F|Its just not gonna work out i'm afraid",
-        -30: "W|Wet and very cold",
-        -32: "F|Put the kettle on as there's no chance of a send",
-        -16: "B|Warm and wet, look for overhang",
-        -18: "W|Very warm and wet, overhang required",
-        -10: "F|Extremely warm and wet",
+        -22: "Blue|Wet but mild, look for overhang",
+        -28: "89243A|Its just not gonna work out i'm afraid",
+        -30: "Warning|Wet and very cold",
+        -32: "89243A|Put the kettle on as there's no chance of a send",
+        -16: "Blue|Warm and wet, look for overhang",
+        -18: "Warning|Very warm and wet, overhang required",
+        -10: "89243A|Extremely warm and wet",
         #Soaking ratings
-        -38: "F|Extremely wet and cold",
-        -40: "F|Extremely wet and very cold",
-        -42: "R|Don't even think of getting the send in",
-        -26: "F|Extrememly wet and warm",
-        -20: "R|Why are you even asking?"
+        -38: "89243A|Extremely wet and cold",
+        -40: "89243A|Extremely wet and very cold",
+        -42: "Red|Don't even think of getting the send in",
+        -26: "89243A|Extrememly wet and warm",
+        -20: "Red|Why are you even asking?"
     } 
     return switch.get(BoulderScore, "Unprecidented Boulder Score of: " + str(BoulderScore))
 
 def output(BoulderJudgement):
-    ClothesDict["BoulderJudgment"] = BoulderJudgement
+    ClothesDict["BoulderJudgement"] = BoulderJudgement
     return (str(ClothesDict))
 
 if __name__ == "__main__":

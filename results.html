@@ -10,29 +10,63 @@
     <body>
         <div class="flex">
             <div id='container' class='flex'>
-                <div id='BoulderResultsContainer' class='flex'>
-                    <h3 style="font-family: courier;">Boulder Judgment:</h3>
+                <div id='BoulderResultsContainer' class='flex-container'>
+                    <div id='BoulderResultsContainerLeft' class='flex-Invis'>
+                        <h2 style="font-family: courier;margin-left:5px;">Boulder Judgment</h2>
+                    </div>
+                    <div id='BoulderResultsContainerRight' class='flex-container'>
+                        <script>
+                            returnBoulderJudgement();
+                        </script>
+                    </div>
                 </div>
                 <div id='ResultTopContainer' class='flex'>
-                    <h1 style="font-family: courier;">Pack:</h1>
+                    <u>
+                        <h1 style="font-family: courier;">Pack</h1>
+                    </u>
                 </div>
-                <div id='InvisibleContainer' class= 'flex'>
-                    <script>
-                        returnPack();
-                    </script>
+                <div id='InvisibleContainer' class= 'flex-Invis'>
+                    <div id='InvisConLeft' class = 'flex'>
+                        <script>
+                            returnClothes('True', 1);
+                            console.log("Powered by Dark Sky")
+                        </script>
+                    </div>
+                    <div id='InvisConRight' class = 'flex'>
+                        <script>
+                            returnClothes('True', 0);
+                        </script>
+                    </div>
                 </div>
                 <div id='ResultBotContainer' class='flex'>
-                    <h1 style="font-family: courier;">Lack:</h1>
-                </div>
-                <div id='InvisibleContainer' class= 'flex'>
-                    <script>
-                        returnLack();
-                    </script>
-                </div>
-                <div id='SummaryContainer' class='flex'>
                     <u>
-                        <h2 style="font-family: courier;">Summary:</h2>
+                        <h1 style="font-family: courier;">Lack</h1>
                     </u>
+                </div>
+                <div id='InvisibleContainer' class= 'flex-Invis'>
+                    <div id='InvisConLeft' class = 'flex'>
+                        <script>
+                            returnClothes('False', 1);
+                        </script>
+                    </div>
+                    <div id='InvisConRight' class = 'flex'>
+                        <script>
+                            returnClothes('False', 0);
+                        </script>
+                    </div>
+                </div>
+                <div id='SummaryContainer' class='flex-Summary'>
+                    <div id='SummaryContainerLeft'>
+                        <u>
+                            <h2 style="font-family: courier;">Summary</h2>
+                        </u>
+                    </div>
+                    <div id='SummaryContainerRight'>
+                        <script>
+                            returnSummary()
+                        </script>
+                    </div>
+                    
                 </div>
             </div>
             <p style="color: black; font-family: courier">Powered By DarkSky</p>
