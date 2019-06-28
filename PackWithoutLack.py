@@ -21,7 +21,7 @@ def main(location, days, hours):
         BoulderJudgement = recommenderD(collectedData, days)
     output(BoulderJudgement)
 
-ClothesDict = {'Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Waterproof Jacket':'False','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'}
+ClothesDict = {'Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'}
 global BoulderScore
 
 class bcolors:

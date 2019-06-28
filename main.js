@@ -1,5 +1,5 @@
 
-ClothesDict = {'summary':"Highest amount of rainfall on a given day will be  0.4mm on Tuesday.<br>Highest temperature will be 19\u00b0C on Wednesday. <br>Lowest temperature will be 5\u00b0C on Tuesday.",'BoulderJudgement':'Green|PERFECT','Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Waterproof Jacket':'False','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'};
+ClothesDict = {'summary':"Highest amount of rainfall on a given day will be  0.4mm on Tuesday.<br>Highest temperature will be 19\u00b0C on Wednesday. <br>Lowest temperature will be 5\u00b0C on Tuesday.",'BoulderJudgement':'Blue|Very wet and cold','Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Waterproof Jacket':'False','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'};
 
 /*
 class APICall{

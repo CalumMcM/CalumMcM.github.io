@@ -6,18 +6,26 @@
         <meta name="description" content="Never Pack without a Lack of what you need">
         <link href="stylesheet.css" rel="stylesheet" type="text/css">
         <script type ="text/javascript" src="main.js"></script>
+        <link rel="shortcut icon" href="icon.png">
     </head>
     <body>
         <div class="flex">
             <div id='container' class='flex'>
-                <div id='BoulderResultsContainer' class='flex-container'>
-                    <div id='BoulderResultsContainerLeft' class='flex-Invis'>
-                        <h2 style="font-family: courier;margin-left:5px;">Boulder Judgment</h2>
+                <div id='header' class = 'flex-Summary'>
+                    <div id='BackButtonContainer'>
+                        <button onclick="window.location.href = 'index.html'" class = "BackButton"><span><b>Run Again</b></span></button>
                     </div>
-                    <div id='BoulderResultsContainerRight' class='flex-container'>
-                        <script>
-                            returnBoulderJudgement();
-                        </script>
+                    <div id='BoulderResultsContainer' class='flex-container'>
+                        <div id='BoulderResultsContainerLeft' class='flex-Invis'>
+                            <center>
+                                <h2 style="font-family: courier;margin-left:5px;">Boulder Judgment</h2>
+                            </center>
+                        </div>
+                        <div id='BoulderResultsContainerRight' class='flex-container'>
+                            <script>
+                                returnBoulderJudgement();
+                            </script>
+                        </div>
                     </div>
                 </div>
                 <div id='ResultTopContainer' class='flex'>
