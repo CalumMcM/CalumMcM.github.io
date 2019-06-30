@@ -24,7 +24,7 @@ def main(location, daysS, hoursS):
     ClothesDict['BoulderJudgement'] = BoulderJudgement
     return str(ClothesDict)
 
-ClothesDict = {'BoulderJudgement':'','Summary':'','Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'}
+ClothesDict = {'BoulderJudgement':'','Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'}
 global BoulderScore
 
 class bcolors:
@@ -102,7 +102,7 @@ def breakDownData50(dataDark, HoursWanted):
     highestPrecipProb = max(collectedData['preciph'])                                         #Highest precipitation probability
     RHP = collectedData['rainsh'][collectedData['preciph'].index(highestPrecipProb)]          #Rain for Highest Proability
     timeOfRHP = collectedData['timesh'][collectedData['preciph'].index(highestPrecipProb)] 
-    summary = Summary48h + "Highest amount of rainfall during an hour will be at " + timeOfRHP + ". With " + str(RHP) + "mm falling, and a chance of " + str(highestPrecipProb*100) + "%<br>The total rainfall will be: " + str(totalRainfall) + "mm<br>The average temperature will be: " + str(round(averageTemps,1)) + u"\u00b0C"
+    summary = Summary48h + " Highest amount of rainfall during an hour will be at " + timeOfRHP + ". With " + str(RHP) + "mm falling, and a chance of " + str(highestPrecipProb*100) + "%<br>The total rainfall will be: " + str(totalRainfall) + "mm<br>The average temperature will be: " + str(round(averageTemps,1)) + "C"
     ClothesDict['summary'] = summary
     return collectedData
 
@@ -111,9 +111,9 @@ def breakDownData50(dataDark, HoursWanted):
 def breakDownData8(dataDark, days):
     collectedData = {'dates':[],'tempAppMin':[],'tempAppMax':[],'winds':[],'cloudCover':[],'rains':[],'precipProbs':[], 'uvIndex':[]} #Dictionary holding all collected data
     dailyDictionary = dataDark["daily"]
-    summary = dailyDictionary["summary"]
+    summary8 = dailyDictionary["summary"]
     dataDaily = dailyDictionary["data"]
-    collectedData['Summary'] = summary
+    collectedData['Summary'] = summary8
 
     curDay = 1
     #print (bcolors.UNDERLINE + "\n\nSummary:\n\n" + bcolors.ENDC)
@@ -143,7 +143,7 @@ def breakDownData8(dataDark, days):
     dayOfMaxRain = collectedData['dates'][collectedData['rains'].index(max(collectedData["rains"]))]
     dayOfMaxTemp = collectedData['dates'][collectedData['tempAppMax'].index(max(collectedData["tempAppMax"]))]
     dayOfMinTemp = collectedData['dates'][collectedData['tempAppMin'].index(max(collectedData["tempAppMin"]))]
-    summary = "Highest amount of rainfall on a given day will be " + str(max(collectedData["rains"])) + "mm on " + str(dayOfMaxRain) + ".<br>Highest temperature will be " + str(max(collectedData["tempAppMax"])) + u"\u00b0C" + " on " + str(dayOfMaxTemp) + ". Lowest temperature will be " + str(min(collectedData["tempAppMin"])) + u"\u00b0C" + " on " + str(dayOfMinTemp) + "."
+    summary = summary8 + " Highest amount of rainfall on a given day will be " + str(max(collectedData["rains"])) + "mm on " + str(dayOfMaxRain) + ".<br>Highest temperature will be " + str(max(collectedData["tempAppMax"])) + "C" + " on " + str(dayOfMaxTemp) + ". Lowest temperature will be " + str(min(collectedData["tempAppMin"])) + "C" + " on " + str(dayOfMinTemp) + "."
     ClothesDict['summary'] = summary
     return collectedData
 
