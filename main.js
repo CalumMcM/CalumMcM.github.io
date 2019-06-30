@@ -4,16 +4,18 @@ function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
     var xhttp = new XMLHttpRequest();
     console.log(locationGIVEN + "HELLO");
     xhttp.open("GET", "http://127.0.0.1:5000/main/"+locationGIVEN+"/"+daysGIVEN+"/"+hoursGIVEN, true);
+    console.log("Powered By Dark Sky");
     xhttp.send();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         ClothesDict = (this.responseText);
         console.log(ClothesDict);
         returnBoulderJudgement(ClothesDict);
-        returnClothes('True', 1, 'InvisConLeft');
-        returnClothes('True', 0, 'InvisConRight');
-        returnClothes('False', 1, 'InvisConLeft');
-        returnClothes('False', 0);
+        returnClothes('True', 1, 'InvisConLeft1');
+        returnClothes('True', 0, 'InvisConRight1');
+        returnClothes('False', 1, 'InvisConLeft2');
+        returnClothes('False', 0, 'InvisConRight2');
+        returnSummary(ClothesDict);
       }
     };
 }
@@ -37,28 +39,25 @@ function returnBoulderJudgement(ClothesDictUNJ){
         console.log(judgement[0]);
     }
 }
-function returnClothes(Truth, divider){
-    /*
+function returnClothes(Truth, divider, container){
     let iterator = 1;
     for (let clothes in ClothesDict){
         if(ClothesDict[clothes] === Truth){
-            if ((iterator%2)==divider){
+            if ((iterator%2)==divider){ //Divider means every second item from the list is printed to the page
                 if (Truth == 'True'){
-                    document.write(' + ' + clothes +'<br> ');
+                    console.log(clothes);
+                    document.getElementById(container).innerHTML += ' + ' + clothes +'<br> ' ;
                 } else{
-                    document.write(' - ' + clothes +'<br> ');
+                    console.log(clothes);
+                    document.getElementById(container).innerHTML += ' - ' + clothes +'<br> ' ;
                 }
             }
             iterator++;
         }
     }
-    */
 }
-function returnSummary(){
-    document.getElementById('SummaryContainerRight').innerHTML = ClothesDict['summary'];
-    loadDoc();
+function returnSummary(ClothesDict){
+    document.getElementById('SummaryContainerRight').innerHTML ="<span style='font-size:13px'>"+ClothesDict['summary']+"</span>";
 }
-function loadDoc() {
-    
-  }
+
   //https://api.opencagedata.com/geocode/v1/json?q=EH39JN&key=b71199c8872647f888aee90d767ae10b

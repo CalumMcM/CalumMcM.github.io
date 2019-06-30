@@ -118,17 +118,28 @@
     border-radius: 10px;
     margin-bottom: 5px
 }
-#InvisConLeft{
+#InvisConLeft1{
     width: 200px;
     height: 170px;
     font-size: 22.5px;
     justify-content: center;
 }
-#InvisConRight{
+#InvisConLeft2{
     width: 200px;
     height: 170px;
     font-size: 22.5px;
-
+    justify-content: center;
+}
+#InvisConRight1{
+    width: 200px;
+    height: 170px;
+    font-size: 22.5px;
+    justify-content: center;
+}
+#InvisConRight2{
+    width: 200px;
+    height: 170px;
+    font-size: 22.5px;
     justify-content: center;
 }
 #bot-box{ 
