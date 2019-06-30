@@ -53,6 +53,7 @@ myproject\Scripts\activate
 3. Install flask in you source
 ```
 pip install flask
+pip install -U flask-cors
 ```
 4. Run packwithoutlack.py
 ```
