@@ -53,6 +53,7 @@ myproject\Scripts\activate
 3. Install flask in you source
 ```
 pip install flask
+pip install -U flask-cors
 ```
 4. Run packwithoutlack.py
 ```
@@ -62,7 +63,5 @@ python packwithoutlack.py
 
 _Works best on OSX for current terminal output formatting_
 _Also requires to be run as python 2.7 or any other python 2.x package_
-https://www.makeuseof.com/tag/python-javascript-communicate-json/
-https://www.reddit.com/r/javascript/comments/80non7/how_to_run_a_python_script_in_an_html_document/
 
 Hosting website: https://pages.github.com/
