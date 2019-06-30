@@ -7,8 +7,11 @@ import urllib2
 import json
 from datetime import datetime
 from flask import Flask
+from flask_cors import CORS
+import json
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/main/<location>/<daysS>/<hoursS>")
 def main(location, daysS, hoursS):
@@ -22,7 +25,7 @@ def main(location, daysS, hoursS):
         collectedData = breakDownData8(dataDark, days)
         BoulderJudgement = recommenderD(collectedData, days)
     ClothesDict['BoulderJudgement'] = BoulderJudgement
-    return str(ClothesDict)
+    return json.dumps(ClothesDict)
 
 ClothesDict = {'BoulderJudgement':'','Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'}
 global BoulderScore

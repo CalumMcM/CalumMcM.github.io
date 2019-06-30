@@ -1,4 +1,5 @@
 
+
 ClothesDict = {'summary':"Highest amount of rainfall on a given day will be  0.4mm on Tuesday.<br>Highest temperature will be 19\u00b0C on Wednesday. <br>Lowest temperature will be 5\u00b0C on Tuesday.",'BoulderJudgement':'Blue|Very wet and cold','Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Waterproof Jacket':'False','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'};
 
 /*
@@ -66,7 +67,6 @@ function returnBoulderJudgement(){
     } else {
         document.write(judgement[0].fontcolor(colour[0]).fontsize(5).bold());
     }
-
 }
 function returnClothes(Truth, divider){
     let iterator = 1;
@@ -85,4 +85,16 @@ function returnClothes(Truth, divider){
 }
 function returnSummary(){
     document.getElementById('SummaryContainerRight').innerHTML = ClothesDict['summary'];
+    loadDoc();
 }
+function loadDoc() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+      }
+    };
+    xhttp.open("GET", "http://127.0.0.1:5000/main/EH39JN/7/8", true);
+    xhttp.send();
+  }
+  //https://api.opencagedata.com/geocode/v1/json?q=EH39JN&key=b71199c8872647f888aee90d767ae10b
