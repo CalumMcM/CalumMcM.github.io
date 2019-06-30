@@ -9,6 +9,13 @@
         <link rel="shortcut icon" href="icon.png">
     </head>
     <body>
+        <script>
+            const params = window.location.search.substr(1).split('&')
+            const locationGET = (params[0].split('='))[1];
+            const daysGET = (params[1].split('='))[1];
+            const hoursGET = (params[2].split('='))[1];
+            callPackWithoutLack(locationGET, daysGET, hoursGET);    
+        </script>
         <div class="flex">
             <div id='container' class='flex'>
                 <div id='header' class = 'flex-Summary'>
@@ -22,9 +29,7 @@
                             </center>
                         </div>
                         <div id='BoulderResultsContainerRight' class='flex-container'>
-                            <script>
-                                returnBoulderJudgement();
-                            </script>
+                            <p>D</p>
                         </div>
                     </div>
                 </div>
@@ -36,14 +41,10 @@
                 <div id='InvisibleContainer' class= 'flex-Invis'>
                     <div id='InvisConLeft' class = 'flex'>
                         <script>
-                            returnClothes('True', 1);
                             console.log("Powered by Dark Sky")
                         </script>
                     </div>
                     <div id='InvisConRight' class = 'flex'>
-                        <script>
-                            returnClothes('True', 0);
-                        </script>
                     </div>
                 </div>
                 <div id='ResultBotContainer' class='flex'>

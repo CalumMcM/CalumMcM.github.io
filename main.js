@@ -1,74 +1,44 @@
 
 
-ClothesDict = {'summary':"Highest amount of rainfall on a given day will be  0.4mm on Tuesday.<br>Highest temperature will be 19\u00b0C on Wednesday. <br>Lowest temperature will be 5\u00b0C on Tuesday.",'BoulderJudgement':'Blue|Very wet and cold','Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Waterproof Jacket':'False','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'};
-
-/*
-class APICall{
-    constructor(location, days, hours){
-        this._location = location;
-        this._days = days;
-        this._hours = hours;
-    }
-    get location(){
-        return this._location;
-    }
-    get days(){
-        return this._days;
-    }
-    get hours(){
-        return this._hours;
-    }
-    set location(newLocation){
-        this._location = newLocation;
-    }
-    set days(newDays){
-        this._days = newDays;
-    }
-    set hours(newHours){
-        this._hours = newHours;
-    }
-    callPackWithoutLackAPI(){
-        // Instantiate the Shell object and invoke its execute method.
-        const response = await fetch('http://example.com/movies.json');
-        console.log(response);
-        
-    }
-    deconstructOutput(){
-        const BoulderJudgement = output['BoulderJudgement'];
-        //Colour Tags: G OKGREEN, L OKLIGHTBLUE, B BLUE, W WARNING, F FAIL, R REDUNDERBLACK
-        let colour = BoulderJudgement.match(/[GLBWFR]/); //Matches first letter of boulder judgement (colour tag)
-        let judgement = BoulderJudgement.match(/[GLBWFR]#(.*)/); //Matched Everything after # (Boulder judgement)
-        return colour, judgement
-    }
+function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
+    var xhttp = new XMLHttpRequest();
+    console.log(locationGIVEN + "HELLO");
+    xhttp.open("GET", "http://127.0.0.1:5000/main/"+locationGIVEN+"/"+daysGIVEN+"/"+hoursGIVEN, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        ClothesDict = (this.responseText);
+        console.log(ClothesDict);
+        returnBoulderJudgement(ClothesDict);
+        returnClothes('True', 1, 'InvisConLeft');
+        returnClothes('True', 0, 'InvisConRight');
+        returnClothes('False', 1, 'InvisConLeft');
+        returnClothes('False', 0);
+      }
+    };
 }
-function callFunction(){
-    location = 'EH£9jN';
-    days = '2';
-    hours ='6';
-    // Instantiate the Shell object and invoke its execute method.
-    const execSync = require('child_process').execSync;
-    call = 'python PackWithoutLack.py ' + location + ' ' +  days + ' ' + hour;
-    Clothes.ClothesDict = execSync(call, { encoding: 'utf-8' }); 
-    document.write(console.log(output));
-}
-*/
-function returnBoulderJudgement(){
+function returnBoulderJudgement(ClothesDictUNJ){
+    ClothesDict = JSON.parse(ClothesDictUNJ)
+    console.log(ClothesDict);
     boulderJudgementFull = ClothesDict['BoulderJudgement'];
+    console.log(boulderJudgementFull);
     //Colour Tags: G OKGREEN, L OKLIGHTBLUE, B BLUE, W WARNING, F FAIL, R REDUNDERBLACK
     let colour = boulderJudgementFull.match(/Green|skyblue|Blue|Warning|89243A|Red/); //Matches first letter of boulder judgement (colour tag)
     let judgement = boulderJudgementFull.match(/[^\|]*$/); //Matched Everything after # (Boulder judgement)
     if (colour[0] == 'Warning'){
         document.getElementById('BoulderResultsContainerRight').style.backgroundColor = "yellow";
-        document.write(judgement[0].fontcolor('black').fontsize(5).bold());
+        document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:black'>"+judgement[0]+"</span>";
     } 
     else if (colour[0] == 'Red'){
         document.getElementById('BoulderResultsContainerRight').style.backgroundColor = "Red";
-        document.write(judgement[0].fontcolor('white').fontsize(5).bold());
+        document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:white'>"+judgement[0]+"</span>";
     } else {
-        document.write(judgement[0].fontcolor(colour[0]).fontsize(5).bold());
+        document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:"+colour+"'>"+judgement[0]+"</span>";
+        console.log(judgement[0]);
     }
 }
 function returnClothes(Truth, divider){
+    /*
     let iterator = 1;
     for (let clothes in ClothesDict){
         if(ClothesDict[clothes] === Truth){
@@ -82,19 +52,13 @@ function returnClothes(Truth, divider){
             iterator++;
         }
     }
+    */
 }
 function returnSummary(){
     document.getElementById('SummaryContainerRight').innerHTML = ClothesDict['summary'];
     loadDoc();
 }
 function loadDoc() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-      }
-    };
-    xhttp.open("GET", "http://127.0.0.1:5000/main/EH39JN/7/8", true);
-    xhttp.send();
+    
   }
   //https://api.opencagedata.com/geocode/v1/json?q=EH39JN&key=b71199c8872647f888aee90d767ae10b
