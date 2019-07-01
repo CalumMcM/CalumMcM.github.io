@@ -11,19 +11,19 @@ function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         ClothesDict = (this.responseText);
-        returnBoulderJudgement(ClothesDict);
+        returnBoulderJudgement(ClothesDict, daysGIVEN);
         returnClothes('True', 1, 'InvisConLeft1');
         returnClothes('True', 0, 'InvisConRight1');
         returnClothes('False', 1, 'InvisConLeft2');
         returnClothes('False', 0, 'InvisConRight2');
-        returnSummary(ClothesDict, daysGIVEN);
+        returnSummary(ClothesDict);
       }
     };
 }
 function returnBoulderJudgement(ClothesDictUNJ, daysGIVEN){
     ClothesDict = JSON.parse(ClothesDictUNJ)
     boulderJudgementFull = ClothesDict['BoulderJudgement'];
-    if (daysGIVEN < 2){
+    if ( daysGIVEN < 3){
         //Colour Tags: G OKGREEN, L OKLIGHTBLUE, B BLUE, W WARNING, F FAIL, R REDUNDERBLACK
         let colour = boulderJudgementFull.match(/Green|skyblue|Blue|Warning|89243A|Red/); //Matches first letter of boulder judgement (colour tag)
         let judgement = boulderJudgementFull.match(/[^\|]*$/); //Matched Everything after # (Boulder judgement)
@@ -53,10 +53,8 @@ function returnClothes(Truth, divider, container){
         if(ClothesDict[clothes] === Truth){
             if ((iterator%2)==divider){ //Divider means every second item from the list is printed to the page
                 if (Truth == 'True'){
-                    console.log(clothes);
                     document.getElementById(container).innerHTML += ' + ' + clothes +'<br> ' ;
                 } else{
-                    console.log(clothes);
                     document.getElementById(container).innerHTML += ' - ' + clothes +'<br> ' ;
                 }
             }
