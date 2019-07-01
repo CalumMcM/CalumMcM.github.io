@@ -38,29 +38,6 @@ This new feature not not only means that PackWithoutLack tells you what to pack 
 ​																	**GO CHECK IT OUT NOW!!!!**
 
 
-Instructions for setting up python server:
-1. Go to packwithoutlack folder and create virtual environemnt by typing
-```
-virtualenv myProject
-```
-2. Activate the virtual environment
-```
-//MacOSX/Linux
-source myProject/bin/activate
-//Windows
-myproject\Scripts\activate
-```
-3. Install flask in you source
-```
-pip install flask
-pip install -U flask-cors
-```
-4. Run packwithoutlack.py
-```
-python packwithoutlack.py
-```
-5. Pass parameters by going to http://127.0.0.1:5000/ and adding defualt/param1/param2/param3
-
 _Works best on OSX for current terminal output formatting_
 _Also requires to be run as python 2.7 or any other python 2.x package_
 
