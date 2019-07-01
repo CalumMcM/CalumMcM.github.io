@@ -6,7 +6,7 @@ function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
     if (hoursGIVEN == ""){
         hoursGIVEN = daysGIVEN * 24;
     }
-    xhttp.open("GET", "http://thebravesttoaster.pythonanywhere.com/main/"+locationGIVEN+"/"+daysGIVEN+"/"+hoursGIVEN, true);
+    xhttp.open("GET", "https://thebravesttoaster.pythonanywhere.com/main/"+locationGIVEN+"/"+daysGIVEN+"/"+hoursGIVEN, true);
     console.log("Powered By Dark Sky");
     xhttp.send();
     xhttp.onreadystatechange = function() {
