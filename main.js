@@ -7,7 +7,7 @@ function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
         hoursGIVEN = daysGIVEN * 24;
     }
     xhttp.open("GET", "https://thebravesttoaster.pythonanywhere.com/main/"+locationGIVEN+"/"+daysGIVEN+"/"+hoursGIVEN, true);
-    console.log("Powered By Dark Sky");
+    console.log("<Powered By Dark Sky>");
     xhttp.send();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
