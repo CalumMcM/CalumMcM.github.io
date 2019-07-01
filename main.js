@@ -4,7 +4,7 @@ function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
     var xhttp = new XMLHttpRequest();
     locationGIVEN = locationGIVEN.replace(/\s/g, '');
     if (hoursGIVEN == ""){
-        hoursGIVEN = 0;
+        hoursGIVEN = daysGIVEN * 24;
     }
     xhttp.open("GET", "http://thebravesttoaster.pythonanywhere.com/main/"+locationGIVEN+"/"+daysGIVEN+"/"+hoursGIVEN, true);
     console.log("Powered By Dark Sky");
