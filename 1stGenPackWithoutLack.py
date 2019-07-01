@@ -2,32 +2,12 @@
 # Powered by Dark Sky       #
 # Author: Calum McMeekin    #
 #############################
-import sys
+
 import urllib2
 import json
 from datetime import datetime
-from flask import Flask
-from flask_cors import CORS
-import json
 
-app = Flask(__name__)
-CORS(app)
-
-@app.route("/main/<location>/<daysS>/<hoursS>")
-def main(location, daysS, hoursS):
-    days = int(daysS)
-    hours = int(hoursS)
-    dataDark = getAPIData(location)
-    if (days <=2):
-        collectedData = breakDownData50(dataDark, hours)
-        BoulderJudgement = recommenderH(collectedData)
-    else:
-        collectedData = breakDownData8(dataDark, days)
-        BoulderJudgement = recommenderD(collectedData, days)
-    ClothesDict['BoulderJudgement'] = BoulderJudgement
-    return json.dumps(ClothesDict)
-
-ClothesDict = {'BoulderJudgement':'','Street Shoes':'True', 'Gloves':'False','Wellies':'False','Street Trousers':'True','Jumper':'False','Sunglasses':'False','Duvet Jacket':'False','Waterproof Jacket':'False','Suncream Facter 30':'False','Suncream Facter 50':'False','T-shirt':'True','Wooly hat':'False','Thermals':'False'}
+ClothesDict = {'StreetShoes':True, 'Gloves':False,'Wellies':False,'StreetTrousers':True,'WaterproofJacket':False,'Jumper':False,'Sunglasses':False,'DuvetJacket':False,'WaterproofTrousers':False,'SuncreamFactor30':False,'SuncreamFactor50':False,'Tshirt':True,'WoolyHat':False,'Thermals':False}
 global BoulderScore
 
 class bcolors:
@@ -105,8 +85,8 @@ def breakDownData50(dataDark, HoursWanted):
     highestPrecipProb = max(collectedData['preciph'])                                         #Highest precipitation probability
     RHP = collectedData['rainsh'][collectedData['preciph'].index(highestPrecipProb)]          #Rain for Highest Proability
     timeOfRHP = collectedData['timesh'][collectedData['preciph'].index(highestPrecipProb)] 
-    summary = Summary48h + " Highest amount of rainfall during an hour will be at " + timeOfRHP + ". With " + str(RHP) + "mm falling, and a chance of " + str(highestPrecipProb*100) + "%<br>The total rainfall will be: " + str(totalRainfall) + "mm<br>The average temperature will be: " + str(round(averageTemps,1)) + "C"
-    ClothesDict['summary'] = summary
+    print (bcolors.UNDERLINE + "\n\nSummary:\n\n" + bcolors.ENDC + Summary48h + "\nHighest amount of rainfall during an hour will be at " + timeOfRHP + ". With " + str(RHP) + "mm falling, and a chance of " + str(highestPrecipProb*100) + "%\nThe total rainfall will be: " + str(totalRainfall) + "mm\nThe average temperature will be: " + str(round(averageTemps,1)) + u"\u00b0C\n")
+    
     return collectedData
 
 #Extracts required data from Dark Sky API data for number of days given
@@ -114,13 +94,13 @@ def breakDownData50(dataDark, HoursWanted):
 def breakDownData8(dataDark, days):
     collectedData = {'dates':[],'tempAppMin':[],'tempAppMax':[],'winds':[],'cloudCover':[],'rains':[],'precipProbs':[], 'uvIndex':[]} #Dictionary holding all collected data
     dailyDictionary = dataDark["daily"]
-    summary8 = dailyDictionary["summary"]
+    summary = dailyDictionary["summary"]
     dataDaily = dailyDictionary["data"]
-    collectedData['Summary'] = summary8
+    collectedData['Summary'] = summary
 
     curDay = 1
-    #print (bcolors.UNDERLINE + "\n\nSummary:\n\n" + bcolors.ENDC)
-    #print (bcolors.HEADER + bcolors.UNDERLINE + "Day\t\tRainfall (mm)\tHighest Apparent Temperature (" + u"\u00b0C" + ")\tLowest Apparent Temperature ("+ u"\u00b0C" + ")\tCloudCover (%)" + bcolors.ENDC + "\n")
+    print (bcolors.UNDERLINE + "\n\nSummary:\n\n" + bcolors.ENDC)
+    print (bcolors.HEADER + bcolors.UNDERLINE + "Day\t\tRainfall (mm)\tHighest Apparent Temperature (" + u"\u00b0C" + ")\tLowest Apparent Temperature ("+ u"\u00b0C" + ")\tCloudCover (%)" + bcolors.ENDC + "\n")
     for item in dataDaily:
         tempMax = item["apparentTemperatureMax"]
         tempMin = item["apparentTemperatureMin"]
@@ -131,6 +111,10 @@ def breakDownData8(dataDark, days):
         precipProb = item["precipProbability"]
         time = item["sunriseTime"]
         day = (datetime.fromtimestamp(time)).strftime("%A")
+        if (day == "Wednesday" or day == "Thursday" or day == "Saturday"):
+            print (day + "\t" + str(rain) + "\t\t\t" + str(tempMax) + "\t\t\t\t\t" + str(tempMin) + "\t\t\t\t\t" + str(cloudCover*100) + "\n")
+        else:
+            print (day + "\t\t" + str(rain) + "\t\t\t" + str(tempMax) + "\t\t\t\t\t" + str(tempMin) + "\t\t\t\t\t" + str(cloudCover*100) + "\n")
         collectedData['dates'].append(day)
         collectedData['rains'].append(rain)
         collectedData['uvIndex'].append(uv)
@@ -146,8 +130,7 @@ def breakDownData8(dataDark, days):
     dayOfMaxRain = collectedData['dates'][collectedData['rains'].index(max(collectedData["rains"]))]
     dayOfMaxTemp = collectedData['dates'][collectedData['tempAppMax'].index(max(collectedData["tempAppMax"]))]
     dayOfMinTemp = collectedData['dates'][collectedData['tempAppMin'].index(max(collectedData["tempAppMin"]))]
-    summary = summary8 + " Highest amount of rainfall on a given day will be " + str(max(collectedData["rains"])) + "mm on " + str(dayOfMaxRain) + ".<br>Highest temperature will be " + str(max(collectedData["tempAppMax"])) + "C" + " on " + str(dayOfMaxTemp) + ". Lowest temperature will be " + str(min(collectedData["tempAppMin"])) + "C" + " on " + str(dayOfMinTemp) + "."
-    ClothesDict['summary'] = summary
+    print ("\n\n" + summary + "\nHighest amount of rainfall on a given day will be " + str(max(collectedData["rains"])) + "mm on " + str(dayOfMaxRain) + ".\nHighest temperature will be " + str(max(collectedData["tempAppMax"])) + u"\u00b0C" + " on " + str(dayOfMaxTemp) + ". Lowest temperature will be " + str(min(collectedData["tempAppMin"])) + u"\u00b0C" + " on " + str(dayOfMinTemp) + ".\n")
     return collectedData
 
 def recommenderH(collectedData):
@@ -155,22 +138,22 @@ def recommenderH(collectedData):
     averagetemp = sum(collectedData['appTempsh'])/len(collectedData['appTempsh'])
     #Cold temperature filter
     if (averagetemp < 12):
-        ClothesDict['Jumper'] = 'True'
+        ClothesDict['Jumper'] = True
         BoulderScore += 6
         if (averagetemp < 6 and (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.19]) == 0)):
-            ClothesDict['Duvet Jacket'] = 'True'
+            ClothesDict['DuvetJacket'] = True
             BoulderScore -=6
         elif (averagetemp < 1):
             BoulderScore -= 6
-            ClothesDict['Wooly hat'] = 'True'
-            ClothesDict['Duvet Jacket'] = 'True'
+            ClothesDict['WoolyHat'] = True
+            ClothesDict['DuvetJacket'] = True
             if (min(collectedData['appTempsh']) < -2):
                 BoulderScore -= 2
-                ClothesDict['Gloves'] = 'True'
-                ClothesDict['Waterproof Jacket'] = 'True'
+                ClothesDict['Gloves'] = True
+                ClothesDict['WaterproofJacket'] = True
             if (averagetemp < -5):
                 BoulderScore -= 4
-                ClothesDict['Thermals'] = 'True'
+                ClothesDict['Thermals'] = True
     #Warm temperature filter
     if(sum(collectedData['appTempsh'])/len(collectedData['appTempsh']) >= 12): #Averagetemp is > 15
         BoulderScore += 4
@@ -180,49 +163,49 @@ def recommenderH(collectedData):
     if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.19]) > 0): #List comprehension to check if there is ever an hour with >0.19mm of rain
         BoulderScore -= 1
         if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 0.2]) > 0):
-            ClothesDict['Waterproof Jacket'] = 'True'
+            ClothesDict['WaterproofJacket'] = True
             BoulderScore -= 30
             if (len([RainHour for RainHour in collectedData['rainsh'] if RainHour >= 3]) > 0):
                 BoulderScore -= 10
-                ClothesDict['Wellies'] = 'True'
-                ClothesDict['Waterproof Jacket'] = 'True'
+                ClothesDict['Wellies'] = True
+                ClothesDict['WaterproofTrousers'] = True
     #CloudCover filter
     if ( (sum(collectedData['cloudCover'])/len(collectedData['cloudCover'])) < 0.4): #average cloud cover > 30% and uvIndex >6
-        ClothesDict['Sunglasses'] = 'True'
+        ClothesDict['Sunglasses'] = True
     #UV filter
     if (len([uvHour for uvHour in collectedData['uvIndex'] if uvHour >7])):
-        ClothesDict['Suncream Facter 30']
+        ClothesDict['SuncreamFactor30']
         if (len([uvHour for uvHour in collectedData['uvIndex'] if uvHour >9])):
-            ClothesDict['Suncream Facter 50']
+            ClothesDict['SuncreamFactor50']
     return BoulderProcessor(BoulderScore)
 
 def recommenderD(collectedData, days):
     #Cold Filter
     if (len([minTemp for minTemp in collectedData['tempAppMin'] if minTemp < 15]) > 0):
-        ClothesDict["Jumper"] = 'True'
+        ClothesDict["Jumper"] = True
         if (len([minTemp for minTemp in collectedData['tempAppMin'] if minTemp < 10]) > 0 ):
-            ClothesDict["Duvet Jacket"] = 'True'
+            ClothesDict["DuvetJacket"] = True
             if (len([minTemp for minTemp in collectedData['tempAppMin'] if minTemp < 5]) > 0):
-                ClothesDict["Wooly hat"] = 'True'
-                ClothesDict["Waterproof Jacket"] = 'True'
+                ClothesDict["WoolyHat"] = True
+                ClothesDict["WaterproofJacket"] = True
                 if (len([minTemp for minTemp in collectedData['tempAppMin'] if minTemp < 0]) > 0):
-                    ClothesDict["Thermals"] = 'True'
-                    ClothesDict["Gloves"] = 'True'
+                    ClothesDict["Thermals"] = True
+                    ClothesDict["Gloves"] = True
     #Rain filter
     if (len([RainHour for RainHour in collectedData['rains'] if RainHour >= 0.2]) > 0):
-        ClothesDict["Waterproof Jacket"] = 'True'
+        ClothesDict["WaterproofJacket"] = True
         if (len([RainHour for RainHour in collectedData['rains'] if RainHour >= 1.5]) > 0):
-            ClothesDict["Waterproof Jacket"] = 'True'
+            ClothesDict["WaterproofTrousers"] = True
             if (len([RainHour for RainHour in collectedData['rains'] if RainHour >= 3]) > 0):
-                ClothesDict["Wellies"] = 'True'
+                ClothesDict["Wellies"] = True
     #UV Filter
     if (len([uvHour for uvHour in collectedData['uvIndex'] if uvHour >7])):
-        ClothesDict['Suncream Facter 30']
+        ClothesDict['SuncreamFactor30']
         if (len([uvHour for uvHour in collectedData['uvIndex'] if uvHour >9])):
-            ClothesDict['Suncream Facter 50']
+            ClothesDict['SuncreamFactor50']
     #CloudCover Filter
     if (len([cloudCover for cloudCover in collectedData['cloudCover'] if cloudCover<0.35])>0): #average cloud cover > 30% and uvIndex >6
-        ClothesDict['Sunglasses'] = 'True'
+        ClothesDict['Sunglasses'] = True
     #Boulder Judgment
     Consecutives = 0
     BoulderJudgment = bcolors.WARNING + "Never dry rock" + bcolors.ENDC
@@ -244,41 +227,71 @@ def recommenderD(collectedData, days):
 def BoulderProcessor(BoulderScore):
     switch = {
         #Dry ratings
-        9:  "Green|PERFECT",
-        3:  "Green|A tad cold but dry",
-        1:  "Green|Very cold but dry",
-        -3: "Warning|Extremely cold but dry",
-        15: "Green|PERFECT",
-        13: "Green|Very warm but dry",
-        21: "Warning|Extremely warm but dry",
+        9: bcolors.OKGREEN + "PERFECT" + bcolors.ENDC,
+        3: bcolors.OKGREEN + "A tad cold but dry" + bcolors.ENDC,
+        1: bcolors.OKGREEN + "Very cold but dry" + bcolors.ENDC,
+        -3: bcolors.WARNING + "Extremely cold but dry" + bcolors.ENDC,
+        15: bcolors.OKGREEN + "PERFECT" + bcolors.ENDC,
+        13: bcolors.OKGREEN + "Very warm but dry" + bcolors.ENDC,
+        21: bcolors.WARNING + "Extremely warm but dry" + bcolors.ENDC,
         #Damp ratings
-        8:  "skyblue|Mild but damp",
-        2:  "skyblue|A tad cold and damp",
-        0:  "Warning|Very cold and damp",
-        -2: "89243A|Extremely cold and wet",
-        14: "skyblue|Warm but damp",
-        12: "Warning|Very warm and damp",
-        20: "89243A|Extremely warm and damp",
+        8: bcolors.OKLIGHTBLUE + "Mild but damp" + bcolors.ENDC,
+        2: bcolors.OKLIGHTBLUE + "A tad cold and damp" + bcolors.ENDC,
+        0: bcolors.WARNING + "Very cold and damp" + bcolors.ENDC,
+        -2: bcolors.FAIL + "Extremely cold and wet" + bcolors.ENDC,
+        14: bcolors.OKLIGHTBLUE + "Warm but damp" + bcolors.ENDC,
+        12: bcolors.WARNING + "Very warm and damp" + bcolors.ENDC,
+        20: bcolors.FAIL + "Extremely warm and damp" + bcolors.ENDC,
         #Wet ratings
-        -22: "Blue|Wet but mild, look for overhang",
-        -28: "89243A|Its just not gonna work out i'm afraid",
-        -30: "Warning|Wet and very cold",
-        -32: "89243A|Put the kettle on as there's no chance of a send",
-        -16: "Blue|Warm and wet, look for overhang",
-        -18: "Warning|Very warm and wet, overhang required",
-        -10: "89243A|Extremely warm and wet",
+        -22: bcolors.OKBLUE + "Wet but mild, look for overhang" + bcolors.ENDC,
+        -28: bcolors.FAIL + "Its just not gonna work out i'm afraid" + bcolors.ENDC,
+        -30: bcolors.WARNING + "Wet and very cold" + bcolors.ENDC,
+        -32: bcolors.FAIL + "Put the kettle on as there's no chance of a send" + bcolors.ENDC,
+        -16: bcolors.OKBLUE + "Warm and wet, look for overhang" + bcolors.ENDC,
+        -18: bcolors.WARNING + "Very warm and wet, overhang required" + bcolors.ENDC,
+        -10: bcolors.FAIL + "Extremely warm and wet" + bcolors.ENDC,
         #Soaking ratings
-        -38: "89243A|Extremely wet and cold",
-        -40: "89243A|Extremely wet and very cold",
-        -42: "Red|Don't even think of getting the send in",
-        -26: "89243A|Extrememly wet and warm",
-        -20: "Red|Why are you even asking?"
+        -38: bcolors.FAIL + "Extremely wet and cold" + bcolors.ENDC,
+        -40: bcolors.FAIL + "Extremely wet and very cold" + bcolors.ENDC,
+        -42: bcolors.REDUNDERBLACK + "Don't even think of getting the send in" + bcolors.ENDC,
+        -26: bcolors.FAIL + "Extrememly wet and warm" + bcolors.ENDC,
+        -20: bcolors.REDUNDERBLACK + "Why are you even asking?" + bcolors.ENDC
     } 
     return switch.get(BoulderScore, "Unprecidented Boulder Score of: " + str(BoulderScore))
 
 def output(BoulderJudgement):
-    ClothesDict["BoulderJudgement"] = BoulderJudgement
-    return (str(ClothesDict))
+    pack = []
+    leave = []
+    print bcolors.HEADER + "Boulder Judgment: " + BoulderJudgement + "\n"
+    for clothingItem in ClothesDict:
+        if ClothesDict[clothingItem]:
+            pack.append(clothingItem)
+        else:
+            leave.append(clothingItem)
+    print bcolors.UNDERLINE + "You should PACK:" + bcolors.ENDC
+    for item in pack:
+        print bcolors.OKGREEN + item + bcolors.ENDC
+    print bcolors.UNDERLINE + "\nYou should LEAVE:" + bcolors.ENDC + ""
+    for item in leave:
+        print bcolors.WARNING + item + bcolors.ENDC
 
+def main():
+    location = raw_input("Please enter the location of where you are going\n(Postcode is recommended for accurate results): ")
+    days = int(raw_input("How many days will you be going away for (including today and no greater than 8)? "))
+    #night = bool(raw_input("Will you be outside during the night? (y/n) "))
+    dataDark = getAPIData(location)
+    if (days <=2):
+        HoursWanted = int(raw_input("How many hours will you be away for? "))
+        while (HoursWanted < 1 or HoursWanted > 50):
+            HoursWanted = 24
+            if (HoursWanted < 0 or HoursWanted > 50):
+                print ("The number of hours must be between 0 and 50")
+        collectedData = breakDownData50(dataDark, HoursWanted)
+        BoulderJudgement = recommenderH(collectedData)
+    else:
+        collectedData = breakDownData8(dataDark, days)
+        BoulderJudgement = recommenderD(collectedData, days)
+    output(BoulderJudgement)
+    print("Powered By Dark Sky")
 if __name__ == "__main__":
-    app.run()
+    main()
