@@ -13,10 +13,10 @@ function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
       if (this.readyState == 4 && this.status == 200) {
         ClothesDict = (this.responseText);
         returnBoulderJudgement(ClothesDict, daysGIVEN);
-        returnClothes('True', 1, 'InvisConLeft1');
-        returnClothes('True', 0, 'InvisConRight1');
-        returnClothes('False', 1, 'InvisConLeft2');
-        returnClothes('False', 0, 'InvisConRight2');
+        returnClothes('True', 1, 'InvisConLeft1', ClothesDict);
+        returnClothes('True', 0, 'InvisConRight1', ClothesDict);
+        returnClothes('False', 1, 'InvisConLeft2', ClothesDict);
+        returnClothes('False', 0, 'InvisConRight2', ClothesDict);
         returnSummary(ClothesDict);
       }
     };
@@ -48,7 +48,7 @@ function returnBoulderJudgement(ClothesDictUNJ, daysGIVEN){
     }
     
 }
-function returnClothes(Truth, divider, container){
+function returnClothes(Truth, divider, container, ClothesDict){
     let iterator = 1;
     for (let clothes in ClothesDict){
         if(ClothesDict[clothes] === Truth){
