@@ -38,7 +38,6 @@ function returnBoulderJudgement(ClothesDictUNJ, daysGIVEN){
         } 
         else {
             document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:"+colour+"'>"+judgement[0]+"</span>";
-            console.log(judgement[0]);
         }
     } 
     else {
