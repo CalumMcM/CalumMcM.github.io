@@ -3,7 +3,7 @@
 function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
     var xhttp = new XMLHttpRequest();
     console.log(locationGIVEN + "HELLO");
-    xhttp.open("GET", "http://127.0.0.1:5000/main/"+locationGIVEN+"/"+daysGIVEN+"/"+hoursGIVEN, true);
+    xhttp.open("GET", "http://thebravesttoaster.pythonanywhere.com/main/"+locationGIVEN+"/"+daysGIVEN+"/"+hoursGIVEN, true);
     console.log("Powered By Dark Sky");
     xhttp.send();
     xhttp.onreadystatechange = function() {
