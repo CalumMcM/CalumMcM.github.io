@@ -2,6 +2,7 @@
 
 function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
     var xhttp = new XMLHttpRequest();
+    locationGIVEN = locationGIVEN.replace(/\s/g, '');
     if (hoursGIVEN == ""){
         hoursGIVEN = 0;
     }
