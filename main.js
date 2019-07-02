@@ -15,8 +15,14 @@ function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
         returnBoulderJudgement(ClothesDict, daysGIVEN);
         returnClothes('True', 1, 'InvisConLeft1', ClothesDict);
         returnClothes('True', 0, 'InvisConRight1', ClothesDict);
-        returnClothes('False', 1, 'InvisConLeft2', ClothesDict);
-        returnClothes('False', 0, 'InvisConRight2', ClothesDict);
+        if (daysGIVEN < 3){
+            returnClothes('False', 1, 'InvisConLeft2', ClothesDict);
+            returnClothes('False', 0, 'InvisConRight2', ClothesDict);
+        }
+        else {
+            returnForecast(ClothesDict);
+        }
+        
         returnSummary(ClothesDict);
       }
     };
@@ -60,6 +66,20 @@ function returnClothes(Truth, divider, container, ClothesDict){
             }
             iterator++;
         }
+    }
+}
+function returnForecast(ClothesDict){
+    document.getElementById('ResultBotContainer').innerHTML = '<span style="font-family: courier;"><h1><u>Forecast</u></h1></span>'
+    forecast = ClothesDict['forecast']
+    for (let i = 0; i<forecast['days'].length;i++){
+        document.getElementById('forecastContainer0').innerHTML += forecast['days'][i] + '<br>'
+        document.getElementById('forecastContainer1').innerHTML += forecast['rains'][i] + '<br>'
+        document.getElementById('forecastContainer2').innerHTML += forecast['tempMaxs'][i] + '<br>'
+        document.getElementById('forecastContainer3').innerHTML += forecast['tempMins'][i] + '<br>'
+        document.getElementById('forecastContainer4').innerHTML += forecast['cloudCovers'][i] + '<br>'
+
+    }
+    for (let i = 0; i<forecast['days'].length;i++){
     }
 }
 function returnSummary(ClothesDict){
