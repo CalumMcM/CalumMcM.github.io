@@ -70,6 +70,11 @@ function returnClothes(Truth, divider, container, ClothesDict){
 }
 function returnForecast(ClothesDict){
     document.getElementById('ResultBotContainer').innerHTML = '<span style="font-family: courier;"><h1><u>Forecast</u></h1></span>'
+    document.getElementById('forecastContainer0').innerHTML = '<u><br>Day</u><br>'
+    document.getElementById('forecastContainer1').innerHTML = '<u><br>Rainfall (mm)</u><br>'
+    document.getElementById('forecastContainer2').innerHTML = '<u><br>Highest Apparent Temperature (C)</u><br>'
+    document.getElementById('forecastContainer3').innerHTML = '<u><br>Lowest Apparent Temperature (C)</u><br>'
+    document.getElementById('forecastContainer4').innerHTML = '<u><br>CloudCover (%)</u><br>'
     forecast = ClothesDict['forecast']
     for (let i = 0; i<forecast['days'].length;i++){
         document.getElementById('forecastContainer0').innerHTML += forecast['days'][i] + '<br>'
