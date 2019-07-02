@@ -58,9 +58,9 @@ function returnClothes(Truth, divider, container, ClothesDict){
         if(ClothesDict[clothes] === Truth){
             if ((iterator%2)==divider){ //Divider means every second item from the list is printed to the page
                 if (Truth == 'True'){
-                    document.getElementById(container).innerHTML += ' + ' + clothes +'<br> ' ;
+                    document.getElementById(container).innerHTML += clothes +'<br> ' ;
                 } else{
-                    document.getElementById(container).innerHTML += ' - ' + clothes +'<br> ' ;
+                    document.getElementById(container).innerHTML += clothes +'<br> ' ;
                 }
             }
             iterator++;
@@ -69,26 +69,32 @@ function returnClothes(Truth, divider, container, ClothesDict){
 }
 function returnForecast(ClothesDict){
     document.getElementById('ResultBotContainer').style.display = 'block';
-    document.getElementById('ResultBotContainer').innerHTML = '<center><span style="font-family: courier;"><h1><u>Forecast</u></h1></span></center>'
-    document.getElementById('forecastContainer0').innerHTML = '<u><br>Day</u><br>'
-    document.getElementById('forecastContainer1').innerHTML = '<u><br>Rainfall (mm)</u><br>'
-    document.getElementById('forecastContainer2').innerHTML = '<u><br>Highest Apparent Temperature (C)</u><br>'
-    document.getElementById('forecastContainer3').innerHTML = '<u><br>Lowest Apparent Temperature (C)</u><br>'
-    document.getElementById('forecastContainer4').innerHTML = '<u><br>CloudCover (%)</u><br>'
+    document.getElementById('LackBreakLine').style.display = 'block';
+    document.getElementById('ResultBotContainer').innerHTML = '<center><span style="color: black;"><h2>Forecast</h2></span></center>'
+    document.getElementById('forecastContainer0').innerHTML = '<br><span style="color: black;"><u>Day</u></span><br><br>'
+    document.getElementById('forecastContainer1').innerHTML = '<center><br><span style="color: black;"><u>Total Rainfall (mm)</u></span><br><br></center>'
+    document.getElementById('forecastContainer2').innerHTML = '<br><span style="color: black;"><u>Highest Apparent Temperature (C)</u></span><br>'
+    document.getElementById('forecastContainer3').innerHTML = '<br><span style="color: black;"><u>Lowest Apparent Temperature (C)</u></span><br>'
+    document.getElementById('forecastContainer4').innerHTML = '<br><span style="color: black;"><u>CloudCover (%)</u></span><br><br>'
     forecast = ClothesDict['forecast']
     for (let i = 0; i<forecast['days'].length;i++){
-        document.getElementById('forecastContainer0').innerHTML += forecast['days'][i] + '<br>'
-        document.getElementById('forecastContainer1').innerHTML += forecast['rains'][i] + '<br>'
-        document.getElementById('forecastContainer2').innerHTML += forecast['tempMaxs'][i] + '<br>'
-        document.getElementById('forecastContainer3').innerHTML += forecast['tempMins'][i] + '<br>'
-        document.getElementById('forecastContainer4').innerHTML += forecast['cloudCovers'][i] + '<br>'
+        if (i%2==0){
+            colorPrint = 'grey'
+        } else {
+            colorPrint = 'black'
+        }
+        document.getElementById('forecastContainer0').innerHTML += '<span style="color: '+colorPrint+';">' + forecast['days'][i] + '</span><br>'
+        document.getElementById('forecastContainer1').innerHTML += '<span style="color: '+colorPrint+';">' + forecast['rains'][i] + '</span><br>'
+        document.getElementById('forecastContainer2').innerHTML += '<span style="color: '+colorPrint+';">' + forecast['tempMaxs'][i] + '</span><br>'
+        document.getElementById('forecastContainer3').innerHTML += '<span style="color: '+colorPrint+';">' + forecast['tempMins'][i] + '</span><br>'
+        document.getElementById('forecastContainer4').innerHTML += '<span style="color: '+colorPrint+';">' + forecast['cloudCovers'][i] + '</span><br>'
 
     }
-    for (let i = 0; i<forecast['days'].length;i++){
-    }
+    //document.getElementById('InvisibleContainerForecast').innerHTML = '<p style="color: black; font-family: courier"><br>Powered By DarkSky</p>'
+
 }
 function returnSummary(ClothesDict){
-    document.getElementById('SummaryContainerRight').innerHTML ="<span style='font-size:13px'>"+ClothesDict['summary']+"</span>";
+    document.getElementById('SummaryContainer').innerHTML ="<span style='font-size:13px'>"+ClothesDict['summary']+"</span>";
 }
 
   //https://api.opencagedata.com/geocode/v1/json?q=EH39JN&key=b71199c8872647f888aee90d767ae10b

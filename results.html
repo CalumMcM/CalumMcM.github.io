@@ -34,9 +34,10 @@
                     </div>
                 </div>
                 <div id='ResultTopContainer' class='flex'>
-                    <u>
-                        <h1 style="font-family: courier;">Pack</h1>
-                    </u>
+                    <h1 >Pack</h1>
+                    <div class = 'break-line' >
+                        <p></p>
+                    </div>
                 </div>
                 <div id='InvisibleContainer' class= 'flex-Invis'>
                     <div id='InvisConLeft1' class = 'flex'>
@@ -46,25 +47,30 @@
                         <p></p>
                     </div>
                 </div>
-                
-                <div id='SummaryContainer' class='flex-Summary'>
-                    <div id='SummaryContainerLeft'>
-                        <u>
-                            <h2 style="font-family: courier;">Summary</h2>
-                        </u>
-                    </div>
-                    <div id='SummaryContainerRight'>
+                <div id='SummaryContainerUpper'>
+                    <center>
+                            <h2>Summary</h2>
+                    </center>
+                    <div class = 'break-line' >
                         <p></p>
-                    </div>
+                    </div> 
+                </div>
+                <div id='SummaryContainer' class='flex-container'>
+                        <p></p>
                 </div>
                 <div id='ResultBotContainer' class='flex'>
-                    <script>
-                        document.getElementById('ResultBotContainer').style.display = 'none';
-                    </script>
                     <u>
-                        <h1 style="font-family: courier;">Lack</h1>
+                        <h1>Lack</h1>
                     </u>
                 </div>
+                <div id = 'LackBreakLine' class = 'break-line' >
+                        <p></p>
+                </div>
+                <script>
+                    //Hide the containers
+                    document.getElementById('ResultBotContainer').style.display = 'none';
+                    document.getElementById('LackBreakLine').style.display = 'none';
+                </script>
                 <div id='InvisibleContainerForecast' class= 'flex-Invis'>
                     <div id='forecastContainer0' class = 'forecastContainer'>
                         <p></p>
@@ -83,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <p style="color: black; font-family: courier">Powered By DarkSky</p>
+            
         </div>
     </body>
     

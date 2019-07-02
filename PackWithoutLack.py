@@ -58,7 +58,7 @@ def getAPIData(location):
         pos = item["geometry"]
         lat = pos["lat"]
         lng = pos["lng"]
-
+    #Quick Grab: https://api.darksky.net/forecast/2aa80cccb9cabf5848fd5ac03f2fc760/55.9521,-3.1965?units=si
     urlDarkSky = 'https://api.darksky.net/forecast/2aa80cccb9cabf5848fd5ac03f2fc760/' + str(lat) + ',' + str(lng) + '?units=si'
     json_obj = urllib2.urlopen(urlDarkSky)
     dataDark = json.load(json_obj)
