@@ -57,6 +57,7 @@
     font-size: 20px;
     height:30px;
     width: 170px;
+    text-align:center;
     background-color: white;
     margin-bottom:10px;
     border: 0px solid;
@@ -86,16 +87,11 @@
     border-radius: 10px;
     line-height: 15px;
 }
-#ResultTopContainer{
-    color: white;
-    width: 400px;
-    height: 25px;
-    justify-content: center
-}
 #SummaryContainer{
     color: white;
     width: 400px;
     height: 120px;
+    margin-top: 100px;
     border-radius: 10px;
 }
 #SummaryContainerUpper{
@@ -117,6 +113,13 @@
     justify-content: center;
     align-content: center;
 }
+#ResultTopContainer{
+    color: white;
+    width: 400px;
+    height: 25px;
+    margin: 20px;
+    justify-content: center
+}
 #ResultBotContainer{
     color: white;
     width: 400px;
@@ -132,15 +135,26 @@
 }
 #InvisibleContainerForecast{
     width: 550px;
-    height: 170px;
+    height: 300px;
     font-size: 25px;
     border-radius: 10px;
     margin-bottom: 5px
+}
+.forecastContainer{
+    width: 110px;
+    height:300px;
+    font-size: 15px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center
 }
 #LackBreakLine{
     background: grey;
     width:400px;
     height:2px;
+    margin: 30px;
 }
 #InvisConLeft1{
     width: 200px;
@@ -182,23 +196,15 @@
     flex-wrap: nowrap;
     align-items: center;
     width: 600px;
-    height: 250px;
+    height: 350px;
     font-size: 16px;
 }
-.forecastContainer{
-    width: 110px;
-    height:160px;
-    font-size: 15px;
-    margin-bottom: 5px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center
-}
+
 .button {
     border: 0px solid;
     background-color: white;
     font-size: 25px;
+    font-family: Simplifica;
     line-height: 30px;
     padding: 20px;
     border-radius: 30px;
@@ -213,6 +219,7 @@
     transition: 0.5s;
   }
 .button span:after {
+    font-family: Simplifica;
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -249,6 +256,7 @@
     height:35px;
 }
 .BackButton{
+    font-family: Simplifica;
     width:90px;
     height:60px;
     font-size: 16px;
@@ -268,11 +276,12 @@
 }
 
 .BackButton span:after {
+    font-family: Simplifica;
     content: '\0ab';
     position: absolute;
     opacity: 0;
     top: 0;
-    left: -20px;
+    left: -50px;
     transition: 0.5s;
 }
 
