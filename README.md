@@ -1,6 +1,6 @@
-## How Do?
+# How Do?
 
-Its even easier to use thanks to V2 than it was with V1 (And you didnt think that was possible did you).
+Its even easier to use thanks to V2 than it was with V1 (And you didn't think that was possible did you).
 
 1. Simply go to: calummcm.github.io 
 2. Put the location of where you are (postcode works best for this) a long with however long you are going to be there for. 
