@@ -16,8 +16,7 @@ function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
         returnClothes('True', 1, 'InvisConLeft1', ClothesDict);
         returnClothes('True', 0, 'InvisConRight1', ClothesDict);
         if (daysGIVEN < 3){
-            returnClothes('False', 1, 'InvisConLeft2', ClothesDict);
-            returnClothes('False', 0, 'InvisConRight2', ClothesDict);
+            
         }
         else {
             returnForecast(ClothesDict);
@@ -69,7 +68,8 @@ function returnClothes(Truth, divider, container, ClothesDict){
     }
 }
 function returnForecast(ClothesDict){
-    document.getElementById('ResultBotContainer').innerHTML = '<span style="font-family: courier;"><h1><u>Forecast</u></h1></span>'
+    document.getElementById('ResultBotContainer').style.display = 'block';
+    document.getElementById('ResultBotContainer').innerHTML = '<center><span style="font-family: courier;"><h1><u>Forecast</u></h1></span></center>'
     document.getElementById('forecastContainer0').innerHTML = '<u><br>Day</u><br>'
     document.getElementById('forecastContainer1').innerHTML = '<u><br>Rainfall (mm)</u><br>'
     document.getElementById('forecastContainer2').innerHTML = '<u><br>Highest Apparent Temperature (C)</u><br>'
