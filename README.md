@@ -1,3 +1,7 @@
+#PackWithoutLack - V3 - Summaree
+
+The aim for V3 is to remove the lack box and replace it with a more in depth summary of the weather ahead, similar to that of the output of V1
+
 # PackWithoutLack - V2 - BreakTheInternet
 
 PackWithoutLack means that the next time you go to pack your bag before you leave you won't be lacking anything you need.

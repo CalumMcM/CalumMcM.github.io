@@ -15,8 +15,13 @@ function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
         returnBoulderJudgement(ClothesDict, daysGIVEN);
         returnClothes('True', 1, 'InvisConLeft1', ClothesDict);
         returnClothes('True', 0, 'InvisConRight1', ClothesDict);
-        returnClothes('False', 1, 'InvisConLeft2', ClothesDict);
-        returnClothes('False', 0, 'InvisConRight2', ClothesDict);
+        if (daysGIVEN < 3){
+            
+        }
+        else {
+            returnForecast(ClothesDict);
+        }
+        
         returnSummary(ClothesDict);
       }
     };
@@ -41,9 +46,13 @@ function returnBoulderJudgement(ClothesDictUNJ, daysGIVEN){
         }
     } 
     else {
-        document.getElementById('BoulderResultsContainerLeft').innerHTML = "<center> <h3> Boulderable Days </h3></center>";
+        document.getElementById('BoulderResultsContainerLeft').innerHTML = "<span style='font-family: Simplifica;font-size: 22.5px; line-height: 20px'><center> <h3> Boulderable Days </h3></center></span>";
         //for (let boulderAbleDay in boulderJudgementFull)
-        document.getElementById('BoulderResultsContainerRight').innerHTML += "<span style='color:Green'>" + boulderJudgementFull + "</span>";
+        if (boulderJudgementFull == "Absolutely none of them"){
+            document.getElementById('BoulderResultsContainerRight').innerHTML += "<span style='color:Red;font-size: 22.5px'>" + boulderJudgementFull + "</span>";
+        } else{
+            document.getElementById('BoulderResultsContainerRight').innerHTML += "<span style='color:Green;font-size: 22.5px'>" + boulderJudgementFull + "</span>";
+        }
     }
     
 }
@@ -53,17 +62,43 @@ function returnClothes(Truth, divider, container, ClothesDict){
         if(ClothesDict[clothes] === Truth){
             if ((iterator%2)==divider){ //Divider means every second item from the list is printed to the page
                 if (Truth == 'True'){
-                    document.getElementById(container).innerHTML += ' + ' + clothes +'<br> ' ;
+                    document.getElementById(container).innerHTML += clothes +'<br> ' ;
                 } else{
-                    document.getElementById(container).innerHTML += ' - ' + clothes +'<br> ' ;
+                    document.getElementById(container).innerHTML += clothes +'<br> ' ;
                 }
             }
             iterator++;
         }
     }
 }
+function returnForecast(ClothesDict){
+    document.getElementById('ResultBotContainer').style.display = 'block';
+    document.getElementById('LackBreakLine').style.display = 'block';
+    document.getElementById('ResultBotContainer').innerHTML = '<center><span style="color: black;line-height:0px;"><h2>Forecast</h2></span></center>'
+    document.getElementById('forecastContainer0').innerHTML = '<span style="color: black;"><u>Day</u></span><br><br>'
+    document.getElementById('forecastContainer1').innerHTML = '<center><span style="color: black;"><u>Highest Rainfall In An Hour(mm)</u></span><br><br></center>'
+    document.getElementById('forecastContainer2').innerHTML = '<span style="color: black;"><u>Highest Apparent Temperature (C)</u></span><br>'
+    document.getElementById('forecastContainer3').innerHTML = '<span style="color: black;"><u>Lowest Apparent Temperature (C)</u></span><br>'
+    document.getElementById('forecastContainer4').innerHTML = '<span style="color: black;"><u>Cloud Cover (%)</u></span><br><br>'
+    forecast = ClothesDict['forecast']
+    for (let i = 0; i<forecast['days'].length;i++){
+        if (i%2==0){
+            colorPrint = 'grey'
+        } else {
+            colorPrint = 'black'
+        }
+        document.getElementById('forecastContainer0').innerHTML += '<span style="color: '+colorPrint+';">' + forecast['days'][i] + '</span><br>'
+        document.getElementById('forecastContainer1').innerHTML += '<span style="color: '+colorPrint+';">' + forecast['rains'][i] + '</span><br>'
+        document.getElementById('forecastContainer2').innerHTML += '<span style="color: '+colorPrint+';">' + forecast['tempMaxs'][i] + '</span><br>'
+        document.getElementById('forecastContainer3').innerHTML += '<span style="color: '+colorPrint+';">' + forecast['tempMins'][i] + '</span><br>'
+        document.getElementById('forecastContainer4').innerHTML += '<span style="color: '+colorPrint+';">' + forecast['cloudCovers'][i] + '</span><br>'
+
+    }
+    //document.getElementById('InvisibleContainerForecast').innerHTML = '<p style="color: black; font-family: courier"><br>Powered By DarkSky</p>'
+
+}
 function returnSummary(ClothesDict){
-    document.getElementById('SummaryContainerRight').innerHTML ="<span style='font-size:13px'>"+ClothesDict['summary']+"</span>";
+    document.getElementById('SummaryContainer').innerHTML ="<span style='font-size:20px;'>"+ClothesDict['summary']+"</span>";
 }
 
   //https://api.opencagedata.com/geocode/v1/json?q=EH39JN&key=b71199c8872647f888aee90d767ae10b

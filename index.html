@@ -10,26 +10,24 @@
     </head>
     <body>
         <div class="flex">
-            <form target = "_self" action="results.html" method="GET" id = "container" class = "flex">
+            <form target = "_self" action="results.html" method="GET" id = "container" >
                 <u>
-                    <h1 style="font-family: courier;">PackWithoutLack</h1>
+                    <h1 style="font-family: Simplifica; font-size: 50px;">PackWithoutLack</h1>
                 </u>            
                 <center>
-                    <p style="font-family: courier; margin: 20px; font-size: 25px">Fill in the following criteria for the time you are going to be away.</p>
+                    <p style="font-family: Simplifica; margin: 20px; font-size: 40px">Fill in the location for the place you will be for the given time.</p>
                 </center>
-                <div id = "top-box" class = "flex-submit">
+                <div class = "top-box">
                     <center>
-                        <p style="line-height:17px">Location<br>(postcode is best):</p>
+                        <p style="font-size: 25px;">Location:</p>
                     </center>
-                    <input type="text" id='text-field' name="location" placeholder="&nbsp eg: HS33HL"><br>
-                </div>
-                <div id = "top-box" class = "flex-submit">
-                    <p>Days: </p>
+                    <input type="text" id='text-field' name="location" placeholder="&nbsp Postcode is best eg: HS33HL"><br>
+                    <p style="font-size: 25px;">Days: </p>
                     <input type="text" id='text-field' name="days" placeholder="&nbsp eg:4">
-                    <p>Hours (If days < 2):</p>
-                    <input type="text" id='text-field' name="hours" placeholder="&nbsp eg:12" >
+                    <p style="font-size: 25px;">Hours:</p>
+                    <input type="text" id='text-field' name="hours" placeholder="&nbsp If days < 2" >
                 </div>
-                <button class = "button" name="submit" type="submit" value="Submit" ><span><b>Get Results!</b></span></button>
+                <button class = "button" name="submit" type="submit" value="Submit" ><span><b>Punch It</b></span></button>
             </form>
             <p style="color: black; font-family: courier">Powered By DarkSky</p>
         </div>

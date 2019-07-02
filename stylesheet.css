@@ -1,3 +1,11 @@
+@font-face {
+    font-family: "Simplifica";
+    src: url("fonts/simplifica_typeface-webfont.eot");
+    src: 
+    url("fonts/simplifica_typeface-webfont.woff") format("woff"),
+    url("fonts/simplifica_typeface-webfont.ttf") format("ttf"),
+    url("fonts/simplifica_typeface-webfont.svg") format("svg");
+    }
 .flex {
     display: flex;
     justify-content: space-between;
@@ -22,20 +30,37 @@
     display: flex;
     justify-content: flex-start
 }
+.break-line{
+    background: grey;
+    width:400px;
+    height:2px;
+}
 #container {
-    background-color: lightskyblue;
+    font-family: Simplifica;
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    background: linear-gradient(blue,white);;
     color: white;
     width: 600px;
-    height: 750px;
+    height: 850px;
     margin: auto;
     border-radius: 10px;
     justify-content: center
-
   }
 #text-field{
+    font-family: 'Simplifica';
     border-radius:10px;
-    height:20px;
-    margin-bottom:10px
+    font-size: 20px;
+    height:30px;
+    width: 170px;
+    text-align:center;
+    background-color: white;
+    margin-bottom:10px;
+    border: 0px solid;
 }
 #BoulderResultsContainer{
     background-color:black;
@@ -45,7 +70,6 @@
     border-radius: 10px;
     margin:5px;
     line-height: 15px;
-    font-family: courier
 }
 #BoulderResultsContainerLeft{
     background-color:Black;
@@ -54,7 +78,6 @@
     height: 70px;
     border-radius: 10px;
     line-height: 15px;
-    font-family: courier
 }
 #BoulderResultsContainerRight{
     background-color:white;
@@ -63,36 +86,24 @@
     height: 70px;
     border-radius: 10px;
     line-height: 15px;
-    font-family: courier
-}
-#ResultTopContainer{
-    background-color: rgb(14, 245, 33);
-    color: white;
-    width: 400px;
-    height: 100px;
-    border-radius: 10px;
-    justify-content: center
 }
 #SummaryContainer{
-    background-color: rgb(122, 14, 245);
     color: white;
     width: 400px;
-    height: 170px;
+    height: 120px;
+    margin-top: 100px;
     border-radius: 10px;
-    margin-bottom: 5px;
 }
-#SummaryContainerLeft{
-    background-color: rgb(122, 14, 245);
+#SummaryContainerUpper{
     color: white;
-    width: 100px;
-    height: 60px;
+    width: 400px;
+    height: 25px;
     border-radius: 10px;
     margin-bottom: 5px;
     justify-content: center;
     align-content: center;
 }
 #SummaryContainerRight{
-    background-color: rgb(122, 14, 245);
     color: white;
     width: 300px;
     height: 120px;
@@ -101,14 +112,18 @@
     margin-top:10px;
     justify-content: center;
     align-content: center;
-    font-family: courier
 }
-#ResultBotContainer{
-    background-color: rgb(245, 14, 26);
+#ResultTopContainer{
     color: white;
     width: 400px;
-    height: 100px;
-    border-radius: 10px;
+    height: 25px;
+    margin: 20px;
+    justify-content: center
+}
+#ResultBotContainer{
+    color: white;
+    width: 400px;
+    height: 50px;
     justify-content: center
 }
 #InvisibleContainer{
@@ -117,6 +132,29 @@
     font-size: 25px;
     border-radius: 10px;
     margin-bottom: 5px
+}
+#InvisibleContainerForecast{
+    width: 550px;
+    height: 300px;
+    font-size: 25px;
+    border-radius: 10px;
+    margin-bottom: 5px
+}
+.forecastContainer{
+    width: 110px;
+    height:300px;
+    font-size: 15px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center
+}
+#LackBreakLine{
+    background: grey;
+    width:400px;
+    height:2px;
+    margin: 30px;
 }
 #InvisConLeft1{
     width: 200px;
@@ -143,30 +181,34 @@
     justify-content: center;
 }
 #bot-box{ 
-    background: rgba(15, 186, 183, 0.9);
-    width: 100px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 600px;
     height: 100px;
     border-radius: 5px;
-    margin: 50px;
 }
-#top-box{
-    background: rgba(15, 186, 183, 0.9);
-    width: 250px;
-    height: 150px;
-    border-radius: 5px;
-    margin: 20px;
-    font-family: courier;
+.top-box{
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 600px;
+    height: 350px;
     font-size: 16px;
-    line-height:2px;
 }
+
 .button {
-    margin: 50px;
+    border: 0px solid;
+    background-color: white;
     font-size: 25px;
+    font-family: Simplifica;
     line-height: 30px;
     padding: 20px;
-    background: salmon;
-    border-radius: 5px;
-    font-family: 'Courier';
+    border-radius: 30px;
+    opacity: 1;
     transition: all 0.5s;
     cursor: pointer;
 }
@@ -177,6 +219,7 @@
     transition: 0.5s;
   }
 .button span:after {
+    font-family: Simplifica;
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -196,7 +239,6 @@
     width: 400px;
     height: 75px;
     border-radius: 5px;
-    font-family: courier;
     font-size: 16px;
 }
 #innerBox{
@@ -214,16 +256,17 @@
     height:35px;
 }
 .BackButton{
+    font-family: Simplifica;
     width:90px;
     height:60px;
-    font-family: 'Courier';
     font-size: 16px;
     margin-top:10px;
     margin-left:5px;
-    background: salmon;
+    background: white;
     border-radius: 5px;
     transition: all 0.5s;
     cursor: pointer;
+    border: 0px solid;
 }
 .BackButton span {
     cursor: pointer;
@@ -233,16 +276,18 @@
 }
 
 .BackButton span:after {
+    font-family: Simplifica;
     content: '\0ab';
     position: absolute;
     opacity: 0;
     top: 0;
-    left: -20px;
+    left: -50px;
     transition: 0.5s;
 }
 
 .BackButton:hover span {
     padding-left: 25px;
+    opacity: 1;
 }
 
 .BackButton:hover span:after {

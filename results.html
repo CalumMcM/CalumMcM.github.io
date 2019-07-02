@@ -25,7 +25,7 @@
                     <div id='BoulderResultsContainer' class='flex-container'>
                         <div id='BoulderResultsContainerLeft' class='flex-Invis'>
                             <center>
-                                <h2 style="font-family: courier;margin-left:5px;">Boulder Judgment</h2>
+                                <h2 style="font-family: Simplifica;font-size: 30px; line-height: 20px">Boulder Judgment</h2>
                             </center>
                         </div>
                         <div id='BoulderResultsContainerRight' class='flex-container'>
@@ -34,9 +34,10 @@
                     </div>
                 </div>
                 <div id='ResultTopContainer' class='flex'>
-                    <u>
-                        <h1 style="font-family: courier;">Pack</h1>
-                    </u>
+                    <h1 style="line-height:0px;margin-top:80px;">Pack</h1>
+                    <div class = 'break-line' >
+                        <p></p>
+                    </div>
                 </div>
                 <div id='InvisibleContainer' class= 'flex-Invis'>
                     <div id='InvisConLeft1' class = 'flex'>
@@ -46,32 +47,49 @@
                         <p></p>
                     </div>
                 </div>
+                <div id='SummaryContainerUpper'>
+                    <center>
+                            <h2 style="line-height:0px;">Summary</h2>
+                    </center>
+                    <div class = 'break-line' >
+                        <p></p>
+                    </div> 
+                </div>
+                <div id='SummaryContainer' class='flex-container'>
+                        <p></p>
+                </div>
                 <div id='ResultBotContainer' class='flex'>
                     <u>
-                        <h1 style="font-family: courier;">Lack</h1>
+                        <h1>Lack</h1>
                     </u>
                 </div>
-                <div id='InvisibleContainer' class= 'flex-Invis'>
-                    <div id='InvisConLeft2' class = 'flex'>
+                <div id = 'LackBreakLine' class = 'break-line' >
                         <p></p>
-                    </div>
-                    <div id='InvisConRight2' class = 'flex'>
-                        <p></p>
-                    </div>
                 </div>
-                <div id='SummaryContainer' class='flex-Summary'>
-                    <div id='SummaryContainerLeft'>
-                        <u>
-                            <h2 style="font-family: courier;">Summary</h2>
-                        </u>
-                    </div>
-                    <div id='SummaryContainerRight'>
+                <script>
+                    //Hide the containers
+                    document.getElementById('ResultBotContainer').style.display = 'none';
+                    document.getElementById('LackBreakLine').style.display = 'none';
+                </script>
+                <div id='InvisibleContainerForecast' class= 'flex-Invis'>
+                    <div id='forecastContainer0' class = 'forecastContainer'>
                         <p></p>
                     </div>
-                    
+                    <div id='forecastContainer1' class = 'forecastContainer'>
+                        <p></p>
+                    </div>
+                    <div id='forecastContainer2' class = 'forecastContainer'>
+                        <p></p>
+                    </div>
+                    <div id='forecastContainer3' class = 'forecastContainer'>
+                        <p></p>
+                    </div>
+                    <div id='forecastContainer4' class = 'forecastContainer'>
+                        <p></p>
+                    </div>
                 </div>
             </div>
-            <p style="color: black; font-family: courier">Powered By DarkSky</p>
+            
         </div>
     </body>
     
