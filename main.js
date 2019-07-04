@@ -1,4 +1,4 @@
-
+﻿
 
 function callPackWithoutLack(locationGIVEN, daysGIVEN, hoursGIVEN){
     var xhttp = new XMLHttpRequest();
@@ -32,17 +32,26 @@ function returnBoulderJudgement(ClothesDictUNJ, daysGIVEN){
     if ( daysGIVEN < 3){
         //Colour Tags: G OKGREEN, L OKLIGHTBLUE, B BLUE, W WARNING, F FAIL, R REDUNDERBLACK
         let colour = boulderJudgementFull.match(/Green|skyblue|Blue|Warning|89243A|Red/); //Matches first letter of boulder judgement (colour tag)
-        let judgement = boulderJudgementFull.match(/[^\|]*$/); //Matched Everything after # (Boulder judgement)
-        if (colour[0] == 'Warning'){
+		let judgement = boulderJudgementFull.match(/[^\|]*$/); //Matched Everything after # (Boulder judgement)
+		console.log(boulderJudgementFull);
+		console.log(colour[0]);
+		colour[0] = "Blue"
+		if (colour[0] == 'Warning') {
             document.getElementById('BoulderResultsContainerRight').style.backgroundColor = "yellow";
-            document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:black'>"+judgement[0]+"</span>";
+			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:black'>" + judgement[0] +"&️#xFE0F</span>";
         } 
         else if (colour[0] == 'Red'){
             document.getElementById('BoulderResultsContainerRight').style.backgroundColor = "Red";
             document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:white'>"+judgement[0]+"</span>";
-        } 
+		} 
+		else if (colour[0] == 'Blue') {
+			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:" + colour[0] + "'>" + judgement[0] + "&#x1F4A7&#x1F4A7&#x1F4A7</span>";
+		}
+		else if (colour[0] == 'skyblue') {
+			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:" + colour[0] + "'>" + judgement[0] + "&#x1F4A7</span>";
+		}
         else {
-            document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:"+colour+"'>"+judgement[0]+"</span>";
+            document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:"+colour[0]+"'>"+judgement[0]+"</span>";
         }
     } 
     else {
