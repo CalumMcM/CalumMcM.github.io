@@ -51,16 +51,15 @@
     border-radius: 10px;
     justify-content: center
   }
-#text-field{
-    font-family: 'Simplifica';
-    border-radius:10px;
-    font-size: 20px;
-    height:30px;
-    width: 170px;
-    text-align:center;
-    background-color: white;
-    margin-bottom:10px;
-    border: 0px solid;
+#text-field {
+	font-family: 'Agency FB';
+	font-size: 16px;
+	height: 30px;
+	width: 170px;
+	text-align: center;
+	background-color: white;
+	margin-bottom: 10px;
+	border: 0px solid;
 }
 #BoulderResultsContainer{
     background-color:black;
