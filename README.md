@@ -24,7 +24,12 @@ It doesn't matter if you're packing the bag for just this afternoon, the weekend
 # PackWithoutLack - V1 BoulderJudgment
 
 This feature not not only means that PackWithoutLack tells you what to pack but will tell you what the conditions for bouldering are at the supplied postcode, with absolutly no extra input from you!
-
+## How to Run V1:
+1. Clone the repository https://github.com/CalumMcM/CalumMcM.github.io
+2. cd to the directory where it was cloned
+3. Make sure you are running python 2.7
+4. Enter the command: $python PackWithoutLack.py
+5. Follow the instructions in console
 ​																	**GO CHECK IT OUT NOW!!!!**
 
 
