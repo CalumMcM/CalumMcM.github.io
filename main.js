@@ -34,25 +34,29 @@ function returnBoulderJudgement(ClothesDictUNJ, daysGIVEN){
         let colour = boulderJudgementFull.match(/Green|skyblue|Blue|Warning|89243A|Red/); //Matches first letter of boulder judgement (colour tag)
 		let judgement = boulderJudgementFull.match(/[^\|]*$/); //Matched Everything after # (Boulder judgement)
 		console.log(boulderJudgementFull);
-		console.log(colour[0]);
-		colour[0] = "Blue"
 		if (colour[0] == 'Warning') {
-            document.getElementById('BoulderResultsContainerRight').style.backgroundColor = "yellow";
-			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:black'>" + judgement[0] +"&️#xFE0F</span>";
-        } 
-        else if (colour[0] == 'Red'){
-            document.getElementById('BoulderResultsContainerRight').style.backgroundColor = "Red";
-            document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:white'>"+judgement[0]+"</span>";
-		} 
+			document.getElementById('BoulderResultsContainerRight').style.backgroundColor = "yellow";
+			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:black'>&#9888" + judgement[0] + "&#9888</span>";
+		}
+		else if (colour[0] == 'Red') {
+			document.getElementById('BoulderResultsContainerRight').style.backgroundColor = "Red";
+			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:white'>&#10060" + judgement[0] + "&#10060</span>";
+		}
 		else if (colour[0] == 'Blue') {
-			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:" + colour[0] + "'>" + judgement[0] + "&#x1F4A7&#x1F4A7&#x1F4A7</span>";
+			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:" + colour[0] + "'>&#127783" + judgement[0] + "&#127783</span>";
 		}
 		else if (colour[0] == 'skyblue') {
-			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:" + colour[0] + "'>" + judgement[0] + "&#x1F4A7</span>";
+			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:" + colour[0] + "'>&#x1F4A7" + judgement[0] + "&#x1F4A7</span>";
 		}
-        else {
-            document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:"+colour[0]+"'>"+judgement[0]+"</span>";
-        }
+		else if (colour[0] == '89243A') {
+			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:#8B0000'>&#128721" + judgement[0] + "&#128721</span>";
+		}
+		else if (colour[0] == 'Green') {
+			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:" + colour[0] + "'>&#10004" + judgement[0] + "&#10004</span>";
+		}
+		else {
+			document.getElementById('BoulderResultsContainerRight').innerHTML = "<span style='color:HotPink; font-size: 20px'>&#9762Unkown judgement Recieved. Proceed with caution.&#9762</span>";
+		}
     } 
     else {
         document.getElementById('BoulderResultsContainerLeft').innerHTML = "<span style='font-family: Simplifica;font-size: 22.5px; line-height: 20px'><center> <h3> Boulderable Days </h3></center></span>";
