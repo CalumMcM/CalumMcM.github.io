@@ -11,6 +11,10 @@ Its even easier to use thanks to V2 than it was with V1 (And you didn't think th
 She's been out and about so shes in with a shout - in this latest version release PackWithoutLack isn't just the best looking weather predictor with built in boulder conditions but she will also now give you a cheeky wee weather forecast breakdown. 
 What more could you want?
 
+## PackWithoutLack - V3 V3.1
+- Added emoji's for each class for BoulderJudgement
+- Synced PackWithoutLack.py with server version
+- Fixed bug where 'location' text box placeholder was not fitting to container on certain devices
 # PackWithoutLack - V2 - BreakTheInternet
 
 PackWithoutLack means that the next time you go to pack your bag before you leave you won't be lacking anything you need.
