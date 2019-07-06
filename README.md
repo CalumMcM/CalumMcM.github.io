@@ -11,6 +11,11 @@ Its even easier to use thanks to V2 than it was with V1 (And you didn't think th
 She's been out and about so shes in with a shout - in this latest version release PackWithoutLack isn't just the best looking weather predictor with built in boulder conditions but she will also now give you a cheeky wee weather forecast breakdown. 
 What more could you want?
 
+## PackWithoutLack - V3.2
+
+Have the hours text submit button hidden until a number of days < 3 is entered
+https://stackoverflow.com/questions/28696171/display-html-form-based-on-selection-of-radio-button/28697751
+
 ## PackWithoutLack - V3.1
 - Added emoji's for each class for BoulderJudgement
 - Synced PackWithoutLack.py with server version
